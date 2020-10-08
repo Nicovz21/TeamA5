@@ -5,6 +5,10 @@ import SpriteFont.SpriteFont;
 import Utils.Colors;
 
 import javax.swing.*;
+
+import Game.GameState;
+import Game.ScreenCoordinator;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +33,8 @@ public class GamePanel extends JPanel {
 	private SpriteFont pauseLabel;
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
+	private ScreenCoordinator gamestate;
+	private boolean isplaying = true;
 
 	/*
 	 * The JPanel and various important class instances are setup here
@@ -78,9 +84,11 @@ public class GamePanel extends JPanel {
 	}
 
 	public void update() {
-		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
+		//gamestate.getGameState()==GameState.LEVEL
+		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey) && isplaying==true) {
 			isGamePaused = !isGamePaused;
 			keyLocker.lockKey(pauseKey);
+			System.out.println("paused");
 		}
 		
 		if (Keyboard.isKeyUp(pauseKey)) {
@@ -91,6 +99,7 @@ public class GamePanel extends JPanel {
 			screenManager.update();
 		}
 	}
+
 
 	public void draw() {
 		screenManager.draw(graphicsHandler);

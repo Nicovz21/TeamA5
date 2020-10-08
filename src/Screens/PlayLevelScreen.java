@@ -43,13 +43,14 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         switch (playLevelScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
+            	
             	//stop player from moving too far left
                 if(player.getX()< map.getStartBoundX()) {
                 	player.setX(map.getStartBoundX());
                 }
               //stop player from moving too far right
-                if(player.getX()> map.getEndBoundX()) {
-                	player.setX(map.getEndBoundX());
+                if(player.getX()> map.getEndBoundX()-60) {
+                	player.setX(map.getEndBoundX()-60);
                 }
                 player.update();
                 map.update(player);

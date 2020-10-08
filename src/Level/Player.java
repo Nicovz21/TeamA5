@@ -309,12 +309,12 @@ public abstract class Player extends GameObject {
             super.update();
             moveYHandleCollision(moveAmountY);
         }
-        // move player to the right until it walks off screen
-        else if (map.getCamera().containsDraw(this)) {
-            currentAnimationName = "WALK_RIGHT";
-            super.update();
-            moveXHandleCollision(walkSpeed);
-        } else {
+//        // move player to the right until it walks off screen
+//        else if (map.getCamera().containsDraw(this)) {
+//            currentAnimationName = "WALK_RIGHT";
+//            super.update();
+//            moveXHandleCollision(walkSpeed);
+         else {
             // tell all player listeners that the player has finished the level
             for (PlayerListener listener : listeners) {
                 listener.onLevelCompleted();
