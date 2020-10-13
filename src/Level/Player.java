@@ -38,10 +38,10 @@ public abstract class Player extends GameObject {
 
     // define keys
     protected KeyLocker keyLocker = new KeyLocker();
-    protected Key JUMP_KEY = Key.UP;
-    protected Key MOVE_LEFT_KEY = Key.LEFT;
-    protected Key MOVE_RIGHT_KEY = Key.RIGHT;
-    protected Key CROUCH_KEY = Key.DOWN;
+    protected Key JUMP_KEY = Key.W;
+    protected Key MOVE_LEFT_KEY = Key.A;
+    protected Key MOVE_RIGHT_KEY = Key.D;
+    protected Key CROUCH_KEY = Key.S;
 
     // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isInvincible = false;
@@ -309,12 +309,12 @@ public abstract class Player extends GameObject {
             super.update();
             moveYHandleCollision(moveAmountY);
         }
-        // move player to the right until it walks off screen
-        else if (map.getCamera().containsDraw(this)) {
-            currentAnimationName = "WALK_RIGHT";
-            super.update();
-            moveXHandleCollision(walkSpeed);
-        } else {
+//        // move player to the right until it walks off screen
+//        else if (map.getCamera().containsDraw(this)) {
+//            currentAnimationName = "WALK_RIGHT";
+//            super.update();
+//            moveXHandleCollision(walkSpeed);
+         else {
             // tell all player listeners that the player has finished the level
             for (PlayerListener listener : listeners) {
                 listener.onLevelCompleted();

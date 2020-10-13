@@ -18,15 +18,16 @@ public class Cat extends Player {
     public Cat(float x, float y) {
         super(new SpriteSheet(ImageLoader.load("Cat.png"), 24, 24), x, y, "STAND_RIGHT");
         gravity = .5f;
+        //TODO: Water stuff in here
         terminalVelocityY = 6f;
         jumpHeight = 14.5f;
         jumpDegrade = .5f;
         walkSpeed = 2.1f;
         momentumYIncrease = .5f;
-        JUMP_KEY = Key.UP;
-        MOVE_LEFT_KEY = Key.LEFT;
-        MOVE_RIGHT_KEY = Key.RIGHT;
-        CROUCH_KEY = Key.DOWN;
+        JUMP_KEY = Key.W;
+        MOVE_LEFT_KEY = Key.A;
+        MOVE_RIGHT_KEY = Key.D;
+        CROUCH_KEY = Key.S;
     }
 
     public void update() {
