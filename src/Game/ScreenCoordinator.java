@@ -4,6 +4,7 @@ import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Screens.CreditsScreen;
+import Screens.InstructionsScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
 
@@ -19,9 +20,12 @@ public class ScreenCoordinator extends Screen {
 	protected GameState gameState;
 	protected GameState previousGameState;
 
+
 	public GameState getGameState() {
+
 		return gameState;
 	}
+
 
 	// Other Screens can set the gameState of this class to force it to change the currentScreen
 	public void setGameState(GameState gameState) {
@@ -50,6 +54,9 @@ public class ScreenCoordinator extends Screen {
 					case CREDITS:
 						currentScreen = new CreditsScreen(this);
 						break;
+					case INSTRUCTIONS:
+						currentScreen = new InstructionsScreen(this);
+						break;
 				}
 				currentScreen.initialize();
 			}
@@ -65,4 +72,5 @@ public class ScreenCoordinator extends Screen {
 		// call the draw method for the currentScreen
 		currentScreen.draw(graphicsHandler);
 	}
+
 }
