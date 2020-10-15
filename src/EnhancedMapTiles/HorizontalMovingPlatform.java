@@ -18,7 +18,7 @@ import java.awt.image.BufferedImage;
 public class HorizontalMovingPlatform extends EnhancedMapTile {
     private Point startLocation;
     private Point endLocation;
-    private float movementSpeed = 1f;
+    private float movementSpeed = 2f;
     private Direction startDirection;
     private Direction direction;
 

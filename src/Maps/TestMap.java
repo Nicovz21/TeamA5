@@ -36,7 +36,7 @@ public class TestMap extends Map {
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
                 getPositionByTileIndex(24, 6),
-                getPositionByTileIndex(27, 6),
+                getPositionByTileIndex(31, 6),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
