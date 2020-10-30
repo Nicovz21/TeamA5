@@ -31,7 +31,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         map.reset();
 
         // setup player
-        this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+        this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
         this.player.setMap(map);
         this.player.addListener(this);
         this.player.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
@@ -43,17 +43,18 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         switch (playLevelScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
-            	//stop player from moving too far left
+
+                //stop player from moving too far left
                 if(player.getX()< map.getStartBoundX()) {
-                	player.setX(map.getStartBoundX());
+                    player.setX(map.getStartBoundX());
                 }
-              //stop player from moving too far right
-                if(player.getX()> map.getEndBoundX()) {
-                	player.setX(map.getEndBoundX());
+                //stop player from moving too far right
+                if(player.getX()> map.getEndBoundX()-60) {
+                    player.setX(map.getEndBoundX()-60);
                 }
                 player.update();
                 map.update(player);
-                
+
                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:

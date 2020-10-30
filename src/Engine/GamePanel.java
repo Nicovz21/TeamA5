@@ -5,6 +5,10 @@ import SpriteFont.SpriteFont;
 import Utils.Colors;
 
 import javax.swing.*;
+
+import Game.GameState;
+import Game.ScreenCoordinator;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,13 +33,16 @@ public class GamePanel extends JPanel {
 	private SpriteFont pauseLabel;
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
+	private boolean isplaying = true;
+	private ScreenCoordinator coordinator;
 
 	/*
 	 * The JPanel and various important class instances are setup here
 	 */
-	public GamePanel() {
+	public GamePanel(ScreenCoordinator coordinator) {
 		super();
 		this.setDoubleBuffered(true);
+		this.coordinator = coordinator;
 
 		// attaches Keyboard class's keyListener to this JPanel
 		this.addKeyListener(Keyboard.getKeyListener());
@@ -43,7 +50,7 @@ public class GamePanel extends JPanel {
 		graphicsHandler = new GraphicsHandler();
 
 		screenManager = new ScreenManager();
-		
+
 		pauseLabel = new SpriteFont("PAUSE", 365, 280, "Comic Sans", 24, Color.white);
 		pauseLabel.setOutlineColor(Color.black);
 		pauseLabel.setOutlineThickness(2.0f);
@@ -78,19 +85,26 @@ public class GamePanel extends JPanel {
 	}
 
 	public void update() {
-		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
-			isGamePaused = !isGamePaused;
-			keyLocker.lockKey(pauseKey);
-		}
-		
-		if (Keyboard.isKeyUp(pauseKey)) {
-			keyLocker.unlockKey(pauseKey);
-		}
-
-		if (!isGamePaused) {
+		//only pause if in the level
+		if(coordinator.getGameState()!=GameState.LEVEL) {
 			screenManager.update();
+		} else {
+			if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey) && isplaying==true) {
+				isGamePaused = !isGamePaused;
+				keyLocker.lockKey(pauseKey);
+				System.out.println("paused");
+			}
+
+			if (Keyboard.isKeyUp(pauseKey)) {
+				keyLocker.unlockKey(pauseKey);
+			}
+
+			if (!isGamePaused) {
+				screenManager.update();
+			}
 		}
 	}
+
 
 	public void draw() {
 		screenManager.draw(graphicsHandler);

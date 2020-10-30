@@ -5,6 +5,7 @@ import Engine.KeyLocker;
 import Engine.Keyboard;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
+import Level.Map;
 import Utils.AirGroundState;
 import Utils.Direction;
 
@@ -43,11 +44,14 @@ public abstract class Player extends GameObject {
     protected Key MOVE_RIGHT_KEY = Key.D;
     protected Key CROUCH_KEY = Key.S;
 
+    protected Map map;
+
     // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isInvincible = false;
 
-    public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
+    public Player(SpriteSheet spriteSheet, float x, float y, Map map, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
+        this.map = map;
         facingDirection = Direction.RIGHT;
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
@@ -59,11 +63,11 @@ public abstract class Player extends GameObject {
     public void update() {
         moveAmountX = 0;
         moveAmountY = 0;
-       
+
 
         // if player is currently playing through level (has not won or lost)
         if (levelState == LevelState.RUNNING) {
-            applyGravity();
+            if (playerState != PlayerState.SWIMMING) applyGravity();
 
             // update player's state and current actions, which includes things like determining how much it should move each frame and if its walking or jumping
             do {
@@ -114,6 +118,10 @@ public abstract class Player extends GameObject {
             case JUMPING:
                 playerJumping();
                 break;
+            //testing
+            case SWIMMING:
+                playerSwimming();
+                break;
         }
     }
 
@@ -123,7 +131,7 @@ public abstract class Player extends GameObject {
         currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_RIGHT" : "STAND_LEFT";
 
         // if walk left or walk right key is pressed, player enters WALKING state
-        if (Keyboard.isKeyDown(MOVE_LEFT_KEY) || Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+        if (Keyboard.isKeyDown(MOVE_LEFT_KEY) ^ Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
             playerState = PlayerState.WALKING;
         }
 
@@ -144,8 +152,11 @@ public abstract class Player extends GameObject {
         // sets animation to a WALK animation based on which way player is facing
         currentAnimationName = facingDirection == Direction.RIGHT ? "WALK_RIGHT" : "WALK_LEFT";
 
+        if (Keyboard.isKeyDown(MOVE_LEFT_KEY) && Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+            playerState = PlayerState.STANDING;
+        }
         // if walk left key is pressed, move player to the left
-        if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
+        else if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
             moveAmountX -= walkSpeed;
             facingDirection = Direction.LEFT;
         }
@@ -190,7 +201,7 @@ public abstract class Player extends GameObject {
     // player JUMPING state logic
     protected void playerJumping() {
         // if last frame player was on ground and this frame player is still on ground, the jump needs to be setup
-        if (previousAirGroundState == AirGroundState.GROUND && airGroundState == AirGroundState.GROUND) {
+        if ((previousAirGroundState == AirGroundState.GROUND && airGroundState == AirGroundState.GROUND)|| previousAirGroundState == AirGroundState.WATER) {
 
             // sets animation to a JUMP animation based on which way player is facing
             currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP_LEFT";
@@ -225,7 +236,8 @@ public abstract class Player extends GameObject {
             }
 
             // allows you to move left and right while in the air
-            if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
+            if (Keyboard.isKeyDown(MOVE_LEFT_KEY) && Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {}
+            else if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
                 moveAmountX -= walkSpeed;
             } else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
                 moveAmountX += walkSpeed;
@@ -237,10 +249,59 @@ public abstract class Player extends GameObject {
             }
         }
 
+        waterCollisionCheck();
+
         // if player last frame was in air and this frame is now on ground, player enters STANDING state
-        else if (previousAirGroundState == AirGroundState.AIR && airGroundState == AirGroundState.GROUND) {
+        if (previousAirGroundState == AirGroundState.AIR && airGroundState == AirGroundState.GROUND) {
             playerState = PlayerState.STANDING;
         }
+
+        else if (previousAirGroundState == AirGroundState.AIR && airGroundState == AirGroundState.WATER) {
+            playerState = PlayerState.SWIMMING;
+        }
+    }
+
+    protected void playerSwimming() {
+        currentAnimationName = facingDirection == Direction.RIGHT ? "SWIM_RIGHT" : "SWIM_LEFT";
+        //swim
+        if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
+            currentAnimationName = "SWIM_LEFT";
+            moveAmountX -= walkSpeed;
+            facingDirection = Direction.LEFT;
+        }
+        if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+            currentAnimationName = "SWIM_RIGHT";
+            moveAmountX += walkSpeed;
+            facingDirection = Direction.RIGHT;
+        }
+        if (Keyboard.isKeyDown(CROUCH_KEY)) {
+            if (Keyboard.isKeyDown(MOVE_LEFT_KEY)||Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+                currentAnimationName = facingDirection == Direction.RIGHT ? "SWIM_RIGHT" : "SWIM_LEFT";
+            }
+            moveAmountY += walkSpeed;
+        }
+        if (Keyboard.isKeyDown(JUMP_KEY)) {
+            if (Keyboard.isKeyDown(MOVE_LEFT_KEY)||Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+                currentAnimationName = facingDirection == Direction.RIGHT ? "SWIM_RIGHT" : "SWIM_LEFT";
+            }
+            moveAmountY -= walkSpeed;
+        }
+
+        if(!waterCollisionCheck()) airGroundState = AirGroundState.AIR;
+
+        if (previousAirGroundState == AirGroundState.WATER && airGroundState == AirGroundState.AIR) {
+            playerState = PlayerState.JUMPING;
+        }
+    }
+
+    protected boolean waterCollisionCheck() {
+        for (MapTile tile: map.getMapTiles()) {
+            if (MapTileCollisionHandler.isInWater(this,tile)) {
+                airGroundState = AirGroundState.WATER;
+                return true;
+            }
+        }
+        return false;
     }
 
     // while player is in air, this is called, and will increase momentumY by a set amount until player reaches terminal velocity
@@ -266,7 +327,8 @@ public abstract class Player extends GameObject {
     public void onEndCollisionCheckY(boolean hasCollided, Direction direction) {
         // if player collides with a map tile below it, it is now on the ground
         // if player does not collide with a map tile below, it is in air
-        if (direction == Direction.DOWN) {
+        //TODO:hurt enemies
+        if (direction == Direction.DOWN && playerState != PlayerState.SWIMMING) {
             if (hasCollided) {
                 momentumY = 0;
                 airGroundState = AirGroundState.GROUND;
@@ -314,7 +376,7 @@ public abstract class Player extends GameObject {
 //            currentAnimationName = "WALK_RIGHT";
 //            super.update();
 //            moveXHandleCollision(walkSpeed);
-         else {
+        else {
             // tell all player listeners that the player has finished the level
             for (PlayerListener listener : listeners) {
                 listener.onLevelCompleted();
@@ -335,7 +397,7 @@ public abstract class Player extends GameObject {
         }
         // if death animation not on last frame yet, continue to play out death animation
         else if (currentFrameIndex != getCurrentAnimation().length - 1) {
-          super.update();
+            super.update();
         }
         // if death animation on last frame (it is set up not to loop back to start), player should continually fall until it goes off screen
         else if (currentFrameIndex == getCurrentAnimation().length - 1) {

@@ -1,6 +1,7 @@
 package Engine;
 
 import javax.swing.*;
+import Game.ScreenCoordinator;
 
 /*
  * The JFrame that holds the GamePanel
@@ -10,9 +11,9 @@ public class GameWindow {
 	private JFrame gameWindow;
 	private GamePanel gamePanel;
 
-	public GameWindow() {
+	public GameWindow(ScreenCoordinator coordinator) {
 		gameWindow = new JFrame("Game");
-		gamePanel = new GamePanel();
+		gamePanel = new GamePanel(coordinator);
 		gamePanel.setFocusable(true);
 		gamePanel.requestFocusInWindow();
 		gameWindow.setContentPane(gamePanel);

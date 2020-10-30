@@ -7,6 +7,8 @@ import Engine.Key;
 import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
+import Level.Map;
+import Level.MapTileCollisionHandler;
 import Level.Player;
 
 import java.util.HashMap;
@@ -15,15 +17,15 @@ import java.util.HashMap;
 // basically just sets some values for physics and then defines animations
 public class Cat extends Player {
 
-    public Cat(float x, float y) {
-        super(new SpriteSheet(ImageLoader.load("Cat.png"), 24, 24), x, y, "STAND_RIGHT");
-        gravity = .5f;
+    public Cat(float x, float y, Map map) {
+        super(new SpriteSheet(ImageLoader.load("Cat.png"), 24, 24), x, y, map, "STAND_RIGHT");
+        gravity = 0.5f;
         //TODO: Water stuff in here
         terminalVelocityY = 6f;
         jumpHeight = 14.5f;
         jumpDegrade = .5f;
         walkSpeed = 2.1f;
-        momentumYIncrease = .5f;
+        momentumYIncrease = 0.5f; //hang-time
         JUMP_KEY = Key.W;
         MOVE_LEFT_KEY = Key.A;
         MOVE_RIGHT_KEY = Key.D;
@@ -138,6 +140,48 @@ public class Cat extends Player {
 
             put("CROUCH_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(4, 0), 0)
+                            .withScale(3)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .withBounds(8, 12, 8, 6)
+                            .build()
+            });
+            //swim location like that of crouch
+            put("SWIM_RIGHT", new Frame[] {
+                    new FrameBuilder(spriteSheet.getSprite(6, 0), 200)
+                            .withScale(3)
+                            .withBounds(8, 12, 8, 6)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(6, 1), 200)
+                            .withScale(3)
+                            .withBounds(8, 12, 8, 6)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(6, 2), 200)
+                            .withScale(3)
+                            .withBounds(8, 12, 8, 6)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(6, 3), 200)
+                            .withScale(3)
+                            .withBounds(8, 12, 8, 6)
+                            .build()
+            });
+
+            put("SWIM_LEFT", new Frame[] {
+                    new FrameBuilder(spriteSheet.getSprite(6, 0), 200)
+                            .withScale(3)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .withBounds(8, 12, 8, 6)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(6, 1), 200)
+                            .withScale(3)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .withBounds(8, 12, 8, 6)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(6, 2), 200)
+                            .withScale(3)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .withBounds(8, 12, 8, 6)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(6, 3), 200)
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .withBounds(8, 12, 8, 6)
