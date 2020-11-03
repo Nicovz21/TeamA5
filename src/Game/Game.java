@@ -11,10 +11,7 @@ import Engine.ScreenManager;
 public class Game {
 
 
-
-
-
-
+    private ScreenCoordinator coordinator = new ScreenCoordinator();
 
 
     public static void main(String[] args) {
@@ -22,10 +19,10 @@ public class Game {
     }
 
     public Game() {
-        GameWindow gameWindow = new GameWindow();
+        GameWindow gameWindow = new GameWindow(coordinator);
         gameWindow.startGame();
 
         ScreenManager screenManager = gameWindow.getScreenManager();
-        screenManager.setCurrentScreen(new ScreenCoordinator());
+        screenManager.setCurrentScreen(coordinator);
     }
 }

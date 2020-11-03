@@ -29,7 +29,7 @@ public class InstructionsScreen extends Screen {
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
         creditsLabel = new SpriteFont("Instructions", 15, 35, "Times New Roman", 30, Color.white);
-        controlsLabel = new SpriteFont("Controls:   W- Jump   A/D- Left/Right   D- Crouch", 130, 140, "Times New Roman", 20, Color.white);
+        controlsLabel = new SpriteFont("Controls:   W- Jump/Swim up   A/D- Walk/Swim Left/Right   D- Crouch/Swim Down", 130, 140, "Times New Roman", 20, Color.white);
         objectiveLabel = new SpriteFont("Avoid the enemies and reach the gold block at the end of the level!", 60, 220, "Times New Roman",20, Color.white);
         returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 560, "Times New Roman", 30, Color.white);
         keyLocker.lockKey(Key.SPACE);

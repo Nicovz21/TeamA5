@@ -77,8 +77,16 @@ public class MapTileCollisionHandler {
             case JUMP_THROUGH_PLATFORM:
                 return direction == Direction.DOWN && gameObject.intersects(mapTile) &&
                         Math.round(gameObject.getScaledBoundsY2() - 1) == Math.round(mapTile.getScaledBoundsY1());
+            case WATER:
+                return false;
             default:
                 return false;
         }
+    }
+
+    //if touching water
+    public static boolean isInWater(GameObject gameObject, MapTile mapTile) {
+        if (mapTile.tileType == TileType.WATER) return gameObject.overlaps(mapTile);
+        return false;
     }
 }

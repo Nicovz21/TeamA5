@@ -2,6 +2,7 @@ package Maps;
 
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.HurtBox;
 import Engine.ImageLoader;
 import EnhancedMapTiles.EndLevelBox;
 import EnhancedMapTiles.HorizontalMovingPlatform;
@@ -24,8 +25,8 @@ public class TestMap extends Map {
     @Override
     public ArrayList<Enemy> loadEnemies() {
         ArrayList<Enemy> enemies = new ArrayList<>();
-        enemies.add(new BugEnemy(getPositionByTileIndex(15, 9), Direction.LEFT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 1).addY(2), getPositionByTileIndex(22, 1).addY(2), Direction.RIGHT));
+        enemies.add(new BugEnemy(getPositionByTileIndex(15, 12), Direction.LEFT));
+        enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 4).addY(2), getPositionByTileIndex(22, 3).addY(2), Direction.RIGHT));
         return enemies;
     }
 
@@ -35,8 +36,8 @@ public class TestMap extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(24, 6),
-                getPositionByTileIndex(31, 6),
+                getPositionByTileIndex(24, 9),
+                getPositionByTileIndex(31, 9),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -44,7 +45,7 @@ public class TestMap extends Map {
         ));
 
         enhancedMapTiles.add(new EndLevelBox(
-                getPositionByTileIndex(32, 7)
+                getPositionByTileIndex(32, 10)
         ));
 
         return enhancedMapTiles;
@@ -54,7 +55,7 @@ public class TestMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        npcs.add(new Walrus(getPositionByTileIndex(30, 10).subtract(new Point(0, 13)), this));
+        npcs.add(new Walrus(getPositionByTileIndex(30, 13).subtract(new Point(0, 13)), this));
 
         return npcs;
     }
