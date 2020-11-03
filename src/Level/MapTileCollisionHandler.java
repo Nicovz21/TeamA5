@@ -1,6 +1,7 @@
 package Level;
 
 import GameObject.GameObject;
+import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
 
@@ -68,6 +69,7 @@ public class MapTileCollisionHandler {
     }
 
     // based on tile type, perform logic to determine if a collision did occur with an intersecting tile or not
+    //added water case (need to access the gravity in the cat.java class)
     private static boolean hasCollidedWithMapTile(GameObject gameObject, MapTile mapTile, Direction direction) {
         switch (mapTile.getTileType()) {
             case PASSABLE:

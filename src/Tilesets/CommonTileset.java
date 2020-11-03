@@ -2,11 +2,13 @@ package Tilesets;
 
 import Builders.FrameBuilder;
 import Builders.MapTileBuilder;
+import Enemies.Fireball;
 import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.ImageEffect;
 import Level.TileType;
 import Level.Tileset;
+import Utils.Point;
 
 import java.util.ArrayList;
 

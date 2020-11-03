@@ -121,9 +121,10 @@ public class DinosaurEnemy extends Enemy {
 
                 // create Fireball enemy
                 Fireball fireball = new Fireball(new Point(fireballX, fireballY), movementSpeed, 1000);
-
+                //Fireball lavaball = new Fireball(new Point(25, 6), movementSpeed, 1000);
                 // add fireball enemy to the map for it to offically spawn in the level
                 map.addEnemy(fireball);
+                //map.addEnemy(lavaball);
 
                 // change dinosaur back to its WALK state after shooting, reset shootTimer to wait another 2 seconds before shooting again
                 dinosaurState = DinosaurState.WALK;

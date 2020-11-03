@@ -1,25 +1,37 @@
 package Level;
 
+import Enemies.BugEnemy;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
+
 import Level.Map;
+
+import Screens.PlayLevelScreen;
+
 import Utils.AirGroundState;
 import Utils.Direction;
 
 import java.util.ArrayList;
 
 public abstract class Player extends GameObject {
+
+
+
     // values that affect player movement
     // these should be set in a subclass
     protected float walkSpeed = 0;
     protected float gravity = 0;
+    protected float swimGravity = 1;
     protected float jumpHeight = 0;
     protected float jumpDegrade = 0;
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
+    protected float lives = 3;
+    protected float health = 20;
+    protected BugEnemy bug;
 
     // values used to handle player movement
     protected float jumpForce = 0;
@@ -43,6 +55,7 @@ public abstract class Player extends GameObject {
     protected Key MOVE_LEFT_KEY = Key.A;
     protected Key MOVE_RIGHT_KEY = Key.D;
     protected Key CROUCH_KEY = Key.S;
+    protected Key SWIM_KEY = Key.K;
 
     protected Map map;
 
@@ -102,6 +115,7 @@ public abstract class Player extends GameObject {
     protected void applyGravity() {
         moveAmountY += gravity + momentumY;
     }
+    protected void swimGravity(){ moveAmountY += swimGravity + momentumY;}
 
     // based on player's current state, call appropriate player state handling method
     protected void handlePlayerState() {
@@ -118,10 +132,15 @@ public abstract class Player extends GameObject {
             case JUMPING:
                 playerJumping();
                 break;
+
             //testing
             case SWIMMING:
                 playerSwimming();
                 break;
+
+
+
+
         }
     }
 
@@ -144,6 +163,9 @@ public abstract class Player extends GameObject {
         // if crouch key is pressed, player enters CROUCHING state
         else if (Keyboard.isKeyDown(CROUCH_KEY)) {
             playerState = PlayerState.CROUCHING;
+        }
+        else if (Keyboard.isKeyDown(SWIM_KEY)){
+            playerState = playerState.SWIMMING;
         }
     }
 
@@ -217,6 +239,7 @@ public abstract class Player extends GameObject {
                 }
             }
         }
+
 
         // if player is in air (currently in a jump) and has more jumpForce, continue sending player upwards
         else if (airGroundState == AirGroundState.AIR) {
@@ -348,10 +371,22 @@ public abstract class Player extends GameObject {
 
     // other entities can call this method to hurt the player
     public void hurtPlayer(MapEntity mapEntity) {
-        if (!isInvincible) {
+        if (!isInvincible && levelState!=levelState.PLAYER_DEAD) {
             // if map entity is an enemy, kill player on touch
+            lives--;
+            health--;
+
+            System.out.println(lives);
+            System.out.println(health);
             if (mapEntity instanceof Enemy) {
-                levelState = LevelState.PLAYER_DEAD;
+                if(lives==0){
+                    levelState = LevelState.PLAYER_DEAD;
+                }
+                else {
+                    this.setX(map.getStartBoundX());
+                    //this.setX(this.getX()-20);
+                    //bug.intersects();
+                }
             }
         }
     }
@@ -439,4 +474,5 @@ public abstract class Player extends GameObject {
     public void addListener(PlayerListener listener) {
         listeners.add(listener);
     }
+
 }

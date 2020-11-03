@@ -14,6 +14,7 @@ public class Game {
     private ScreenCoordinator coordinator = new ScreenCoordinator();
 
 
+
     public static void main(String[] args) {
         new Game();
     }
