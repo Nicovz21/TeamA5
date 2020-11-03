@@ -46,6 +46,7 @@ public abstract class Player extends GameObject {
     protected AirGroundState previousAirGroundState;
     protected LevelState levelState;
 
+
     // classes that listen to player events can be added to this list
     protected ArrayList<PlayerListener> listeners = new ArrayList<>();
 
@@ -373,19 +374,28 @@ public abstract class Player extends GameObject {
     public void hurtPlayer(MapEntity mapEntity) {
         if (!isInvincible && levelState!=levelState.PLAYER_DEAD) {
             // if map entity is an enemy, kill player on touch
-            lives--;
+            //lives--;
             health--;
 
             System.out.println(lives);
             System.out.println(health);
             if (mapEntity instanceof Enemy) {
+                if(lives ==3 && health==0 || lives==2 && health == 0|| lives == 1 && health ==0){
+                    this.setX(map.getStartBoundX());
+                }
                 if(lives==0){
                     levelState = LevelState.PLAYER_DEAD;
                 }
                 else {
-                    this.setX(map.getStartBoundX());
-                    //this.setX(this.getX()-20);
+                    //this.setX(map.getStartBoundX());
+                    isInvincible = true;
+                    this.setX(this.getX()-10);
+                    isInvincible = false;
                     //bug.intersects();
+                }
+                if(health == 0){
+                    lives--;
+                    health = 20;
                 }
             }
         }
