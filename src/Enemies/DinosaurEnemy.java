@@ -6,6 +6,7 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.Enemy;
+import Level.MapEntityStatus;
 import Level.Player;
 import Utils.AirGroundState;
 import Utils.Direction;
@@ -131,6 +132,13 @@ public class DinosaurEnemy extends Enemy {
             }
         }
         previousDinosaurState = dinosaurState;
+    }
+
+    @Override
+    public void touchedPlayer(Player player) {
+        if (player.getY2() < this.getY1()-10) {
+            this.mapEntityStatus = MapEntityStatus.REMOVED;
+        } else player.hurtPlayer(this);
     }
 
     @Override

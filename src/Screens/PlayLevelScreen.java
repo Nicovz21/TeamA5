@@ -7,7 +7,7 @@ import Game.ScreenCoordinator;
 import Level.Map;
 import Level.Player;
 import Level.PlayerListener;
-import Maps.TestMap;
+import Maps.*;
 import Players.Cat;
 import Utils.Stopwatch;
 

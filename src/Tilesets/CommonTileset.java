@@ -284,7 +284,7 @@ public class CommonTileset extends Tileset {
                 .build();
 
         MapTileBuilder topPoisonTile = new MapTileBuilder(topPoisonFrame)
-                .withTileType(TileType.NOT_PASSABLE);
+                .withTileType(TileType.PASSABLE);
 
         mapTiles.add(topPoisonTile);
 
@@ -294,7 +294,7 @@ public class CommonTileset extends Tileset {
                 .build();
 
         MapTileBuilder poisonTile = new MapTileBuilder(poisonFrame)
-                .withTileType(TileType.NOT_PASSABLE);
+                .withTileType(TileType.PASSABLE);
 
         mapTiles.add(poisonTile);
 
@@ -305,7 +305,7 @@ public class CommonTileset extends Tileset {
                 .build();
 
         MapTileBuilder forestMidBranchTile = new MapTileBuilder(forestMidBranchFrame)
-                .withTileType(TileType.NOT_PASSABLE);
+                .withTileType(TileType.JUMP_THROUGH_PLATFORM);
 
         mapTiles.add(forestMidBranchTile);
 
@@ -547,7 +547,54 @@ public class CommonTileset extends Tileset {
 
         mapTiles.add(topGoldPillarTile);
 
+        //buffers for the mapEditor
+        Frame bufferFrame1 = new FrameBuilder(getSubImage(0, 1), 0)
+                .withScale(tileScale)
+                .build();
 
+        MapTileBuilder bufferTile1 = new MapTileBuilder(bufferFrame1);
+
+        mapTiles.add(bufferTile1);
+
+        Frame bufferFrame2 = new FrameBuilder(getSubImage(0, 1), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder bufferTile2 = new MapTileBuilder(bufferFrame2);
+
+        mapTiles.add(bufferTile2);
+
+        Frame bufferFrame3 = new FrameBuilder(getSubImage(0, 1), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder bufferTile3 = new MapTileBuilder(bufferFrame3);
+
+        mapTiles.add(bufferTile3);
+
+        Frame bufferFrame4 = new FrameBuilder(getSubImage(0, 1), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder bufferTile4 = new MapTileBuilder(bufferFrame4);
+
+        mapTiles.add(bufferTile4);
+
+        Frame bufferFrame5 = new FrameBuilder(getSubImage(0, 1), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder bufferTile5 = new MapTileBuilder(bufferFrame5);
+
+        mapTiles.add(bufferTile5);
+
+        Frame bufferFrame6 = new FrameBuilder(getSubImage(0, 1), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder bufferTile6 = new MapTileBuilder(bufferFrame6);
+
+        mapTiles.add(bufferTile6);
 
         return mapTiles;
     }

@@ -24,12 +24,6 @@ public class EndLevelBox extends EnhancedMapTile {
         if (intersects(player)) {
             player.completeLevel();
         }
-        //Sends player back to beginning of level when passing gold block
-        /*
-        if(player.getX() > this.getX()) {
-        	player.setX(currentFrameIndex);
-        }
-        */
     }
 
     @Override

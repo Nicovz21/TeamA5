@@ -1,8 +1,7 @@
 package MapEditor;
 
 import Level.Map;
-import Maps.TestMap;
-import Maps.TitleScreenMap;
+import Maps.*;
 
 import java.util.ArrayList;
 
@@ -11,6 +10,9 @@ public class EditorMaps {
         return new ArrayList<String>() {{
             add("TestMap");
             add("TitleScreen");
+            add("Map1I");
+            add("Map2I");
+            add("Map6I");
         }};
     }
 
@@ -20,6 +22,12 @@ public class EditorMaps {
                 return new TestMap();
             case "TitleScreen":
                 return new TitleScreenMap();
+            case "Map1I":
+                return new Map1I();
+            case "Map2I":
+                return new Map2I();
+            case "Map6I":
+                return new Map6I();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }

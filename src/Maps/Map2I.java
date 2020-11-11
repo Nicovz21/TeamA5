@@ -14,24 +14,27 @@ import Utils.Point;
 import java.util.ArrayList;
 
 // Represents a test map to be used in a level
-public class TestMap extends Map {
+public class Map2I extends Map {
 
-    public TestMap() {
-        super("test_map.txt", new CommonTileset(), new Point(1, 11));
+    public Map2I() {
+        super("map_2I.txt", new CommonTileset(), new Point(1, 5));
     }
 
     @Override
     public ArrayList<Enemy> loadEnemies() {
         ArrayList<Enemy> enemies = new ArrayList<>();
+        /*
         enemies.add(new BugEnemy(getPositionByTileIndex(15, 12), Direction.LEFT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 4).addY(2), getPositionByTileIndex(22, 4).addY(2), Direction.RIGHT));
+        enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 4).addY(2), getPositionByTileIndex(22, 3).addY(2), Direction.RIGHT));
+        enemies.add(new BlackSpider(getPositionByTileIndex(10,6), getPositionByTileIndex(10,12)));
+         */
         return enemies;
     }
 
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-
+        /*
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
                 getPositionByTileIndex(24, 9),
@@ -45,7 +48,7 @@ public class TestMap extends Map {
         enhancedMapTiles.add(new EndLevelBox(
                 getPositionByTileIndex(32, 10)
         ));
-
+        */
         return enhancedMapTiles;
     }
 
@@ -53,7 +56,7 @@ public class TestMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        npcs.add(new Walrus(getPositionByTileIndex(30, 13).subtract(new Point(0, 13)), this));
+        //npcs.add(new Walrus(getPositionByTileIndex(30, 13).subtract(new Point(0, 13)), this));
 
         return npcs;
     }

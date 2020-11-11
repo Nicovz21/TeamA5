@@ -9,6 +9,7 @@ import Level.Map;
 import Utils.AirGroundState;
 import Utils.Direction;
 
+import java.awt.image.CropImageFilter;
 import java.util.ArrayList;
 
 public abstract class Player extends GameObject {
@@ -48,6 +49,9 @@ public abstract class Player extends GameObject {
 
     // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isInvincible = false;
+
+    protected int health = 20;
+    protected int lives = 5;
 
     public Player(SpriteSheet spriteSheet, float x, float y, Map map, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -118,7 +122,6 @@ public abstract class Player extends GameObject {
             case JUMPING:
                 playerJumping();
                 break;
-            //testing
             case SWIMMING:
                 playerSwimming();
                 break;
@@ -307,6 +310,7 @@ public abstract class Player extends GameObject {
     // while player is in air, this is called, and will increase momentumY by a set amount until player reaches terminal velocity
     protected void increaseMomentum() {
         momentumY += momentumYIncrease;
+        terminalVelocityY = Keyboard.isKeyDown(CROUCH_KEY) ? 10 : 5;
         if (momentumY > terminalVelocityY) {
             momentumY = terminalVelocityY;
         }
@@ -327,7 +331,6 @@ public abstract class Player extends GameObject {
     public void onEndCollisionCheckY(boolean hasCollided, Direction direction) {
         // if player collides with a map tile below it, it is now on the ground
         // if player does not collide with a map tile below, it is in air
-        //TODO:hurt enemies
         if (direction == Direction.DOWN && playerState != PlayerState.SWIMMING) {
             if (hasCollided) {
                 momentumY = 0;
@@ -349,9 +352,21 @@ public abstract class Player extends GameObject {
     // other entities can call this method to hurt the player
     public void hurtPlayer(MapEntity mapEntity) {
         if (!isInvincible) {
-            // if map entity is an enemy, kill player on touch
+            // if map entity is an enemy, reduce health and handle accordingly
             if (mapEntity instanceof Enemy) {
-                levelState = LevelState.PLAYER_DEAD;
+                health --;
+                if (this.getX() <= mapEntity.getX()) {
+                    this.setX(this.getX()-10);
+                } else this.setX(this.getX()+10);
+                if (health == 0) {
+                    lives --;
+                    health = 20;
+                    if (lives == 0) {
+                        levelState = LevelState.PLAYER_DEAD;
+                    } else {
+                        this.setLocation(map.getStartBoundX(), map.getPlayerStartPosition().y);
+                    }
+                }
             }
         }
     }

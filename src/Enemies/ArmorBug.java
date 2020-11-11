@@ -6,7 +6,6 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.Enemy;
-import Level.MapEntityStatus;
 import Level.Player;
 import Utils.AirGroundState;
 import Utils.Direction;
@@ -17,7 +16,7 @@ import java.util.HashMap;
 // This class is for the black bug enemy
 // enemy behaves like a Mario goomba -- walks forward until it hits a solid map tile, and then turns around
 // if it ends up in the air from walking off a cliff, it will fall down until it hits the ground again, and then will continue walking
-public class BugEnemy extends Enemy {
+public class ArmorBug extends Enemy {
 
     private float gravity = .5f;
     private float movementSpeed = .5f;
@@ -25,7 +24,7 @@ public class BugEnemy extends Enemy {
     private Direction facingDirection;
     private AirGroundState airGroundState;
 
-    public BugEnemy(Point location, Direction facingDirection) {
+    public ArmorBug(Point location, Direction facingDirection) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("BugEnemy.png"), 24, 15), "WALK_LEFT");
         this.startFacingDirection = facingDirection;
         this.initialize();
@@ -68,13 +67,6 @@ public class BugEnemy extends Enemy {
     }
 
     @Override
-    public void touchedPlayer(Player player) {
-        if (player.getY2() < this.getY1()-10) {
-            this.mapEntityStatus = MapEntityStatus.REMOVED;
-        } else player.hurtPlayer(this);
-    }
-
-    @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction) {
         // if bug has collided into something while walking forward,
         // it turns around (changes facing direction)
@@ -106,26 +98,26 @@ public class BugEnemy extends Enemy {
     public HashMap<String, Frame[]> getAnimations(SpriteSheet spriteSheet) {
         return new HashMap<String, Frame[]>() {{
             put("WALK_LEFT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(0, 0), 100)
+                    new FrameBuilder(spriteSheet.getSprite(2, 0), 100)
                             .withScale(2)
-                            .withBounds(6, 6, 12, 7)
+                            .withBounds(6, 4, 12, 9)
                             .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 1), 100)
+                    new FrameBuilder(spriteSheet.getSprite(2, 1), 100)
                             .withScale(2)
-                            .withBounds(6, 6, 12, 7)
+                            .withBounds(6, 4, 12, 9)
                             .build()
             });
 
             put("WALK_RIGHT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(0, 0), 100)
+                    new FrameBuilder(spriteSheet.getSprite(2, 0), 100)
                             .withScale(2)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(6, 6, 12, 7)
+                            .withBounds(6, 4, 12, 9)
                             .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 1), 100)
+                    new FrameBuilder(spriteSheet.getSprite(2, 1), 100)
                             .withScale(2)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(6, 6, 12, 7)
+                            .withBounds(6, 4, 12, 9)
                             .build()
             });
         }};
