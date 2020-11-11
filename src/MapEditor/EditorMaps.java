@@ -12,6 +12,7 @@ public class EditorMaps {
             add("TitleScreen");
             add("Map1I");
             add("Map2I");
+            add("Map3I");
             add("Map6I");
         }};
     }
@@ -26,6 +27,8 @@ public class EditorMaps {
                 return new Map1I();
             case "Map2I":
                 return new Map2I();
+            case "Map3I":
+                return new Map3I();
             case "Map6I":
                 return new Map6I();
             default:
