@@ -1,5 +1,7 @@
 package Level;
 
+import Enemies.HurtBox;
+import Enemies.SpikeBox;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
@@ -353,7 +355,16 @@ public abstract class Player extends GameObject {
     public void hurtPlayer(MapEntity mapEntity) {
         if (!isInvincible) {
             // if map entity is an enemy, reduce health and handle accordingly
-            if (mapEntity instanceof Enemy) {
+            //if spikes/lava/poison, insta-kill
+            if (mapEntity instanceof HurtBox) {
+                lives--;
+                health = 20;
+                if (lives == 0) {
+                    levelState = LevelState.PLAYER_DEAD;
+                } else {
+                    this.setLocation(map.getStartBoundX(), map.getPlayerStartPosition().y);
+                }
+            } else if (mapEntity instanceof Enemy) {
                 health --;
                 if (this.getX() <= mapEntity.getX()) {
                     this.setX(this.getX()-10);
