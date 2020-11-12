@@ -2,6 +2,7 @@ package Screens;
 
 import Engine.GraphicsHandler;
 import Engine.Screen;
+import Engine.AudioPlayer;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
@@ -10,6 +11,8 @@ import Level.PlayerListener;
 import Maps.*;
 import Players.Cat;
 import Utils.Stopwatch;
+
+import java.io.IOException;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen implements PlayerListener {
@@ -20,6 +23,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected Stopwatch screenTimer = new Stopwatch();
     protected LevelClearedScreen levelClearedScreen;
     protected LevelLoseScreen levelLoseScreen;
+    protected AudioPlayer audioPlayer;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -27,7 +31,13 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     public void initialize() {
         // define/setup map
-        this.map = new Map3I();
+        this.map = new Map5I();
+        try {
+            this.audioPlayer = new AudioPlayer("HW#10_Victory.wav", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         map.reset();
 
         // setup player

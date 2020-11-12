@@ -13,6 +13,8 @@ public class EditorMaps {
             add("Map1I");
             add("Map2I");
             add("Map3I");
+            add("Map4I");
+            add("Map5I");
             add("Map6I");
         }};
     }
@@ -29,6 +31,10 @@ public class EditorMaps {
                 return new Map2I();
             case "Map3I":
                 return new Map3I();
+            case "Map4I":
+                return new Map4I();
+            case "Map5I":
+                return new Map5I();
             case "Map6I":
                 return new Map6I();
             default:
