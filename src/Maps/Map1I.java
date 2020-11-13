@@ -23,32 +23,20 @@ public class Map1I extends Map {
     @Override
     public ArrayList<Enemy> loadEnemies() {
         ArrayList<Enemy> enemies = new ArrayList<>();
-        /*
-        enemies.add(new BugEnemy(getPositionByTileIndex(15, 12), Direction.LEFT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 4).addY(2), getPositionByTileIndex(22, 3).addY(2), Direction.RIGHT));
-        enemies.add(new BlackSpider(getPositionByTileIndex(10,6), getPositionByTileIndex(10,12)));
-         */
+
+        enemies.add(new BugEnemy(getPositionByTileIndex(12, 8), Direction.LEFT));
+        enemies.add(new BugEnemy(getPositionByTileIndex(17, 19), Direction.LEFT));
+        enemies.add(new BugEnemy(getPositionByTileIndex(38, 18), Direction.RIGHT));
         return enemies;
     }
 
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-        /*
-        enhancedMapTiles.add(new HorizontalMovingPlatform(
-                ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(24, 9),
-                getPositionByTileIndex(31, 9),
-                TileType.JUMP_THROUGH_PLATFORM,
-                3,
-                new Rectangle(0, 6,16,4),
-                Direction.RIGHT
-        ));
 
         enhancedMapTiles.add(new EndLevelBox(
-                getPositionByTileIndex(32, 10)
+                getPositionByTileIndex(47, 14)
         ));
-        */
         return enhancedMapTiles;
     }
 

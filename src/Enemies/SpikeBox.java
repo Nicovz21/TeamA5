@@ -20,7 +20,7 @@ public class SpikeBox extends Enemy {
     protected Point startLocation;
     protected Point endLocation;
 
-    protected float movementSpeed = 1f;
+    protected float movementSpeed = 2f;
     private Direction startMotionDirection;
     protected Direction motionDirection;
     protected AirGroundState airGroundState;
@@ -82,6 +82,28 @@ public class SpikeBox extends Enemy {
             }
         }
 
+    }
+
+    @Override
+    public void onEndCollisionCheckX(boolean hasCollided, Direction direction) {
+        if (hasCollided) {
+            if (direction == Direction.RIGHT) {
+                motionDirection = Direction.LEFT;
+            } else {
+                motionDirection = Direction.RIGHT;
+            }
+        }
+    }
+
+    @Override
+    public void onEndCollisionCheckY(boolean hasCollided, Direction direction) {
+        if (hasCollided) {
+            if (direction == Direction.DOWN) {
+                motionDirection = Direction.UP;
+            } else {
+                motionDirection = Direction.DOWN;
+            }
+        }
     }
 
     @Override

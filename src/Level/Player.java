@@ -359,10 +359,10 @@ public abstract class Player extends GameObject {
             if (mapEntity instanceof HurtBox) {
                 lives--;
                 health = 20;
-                if (lives == 0) {
+                if (lives < 1) {
                     levelState = LevelState.PLAYER_DEAD;
                 } else {
-                    this.setLocation(map.getStartBoundX(), map.getPlayerStartPosition().y);
+                    this.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
                 }
             } else if (mapEntity instanceof Enemy) {
                 health --;
@@ -372,10 +372,10 @@ public abstract class Player extends GameObject {
                 if (health == 0) {
                     lives --;
                     health = 20;
-                    if (lives == 0) {
+                    if (lives < 1) {
                         levelState = LevelState.PLAYER_DEAD;
                     } else {
-                        this.setLocation(map.getStartBoundX(), map.getPlayerStartPosition().y);
+                        this.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
                     }
                 }
             }

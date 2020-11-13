@@ -18,7 +18,7 @@ import java.util.HashMap;
 // if it ends up in the air from walking off a cliff, it will fall down until it hits the ground again, and then will continue walking
 public class ArmorBug extends Enemy {
 
-    private float gravity = .5f;
+    private float gravity = 2f;
     private float movementSpeed = .5f;
     private Direction startFacingDirection;
     private Direction facingDirection;

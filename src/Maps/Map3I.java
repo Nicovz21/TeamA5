@@ -23,32 +23,29 @@ public class Map3I extends Map {
     @Override
     public ArrayList<Enemy> loadEnemies() {
         ArrayList<Enemy> enemies = new ArrayList<>();
-        /*
-        enemies.add(new BugEnemy(getPositionByTileIndex(15, 12), Direction.LEFT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 4).addY(2), getPositionByTileIndex(22, 3).addY(2), Direction.RIGHT));
-        enemies.add(new BlackSpider(getPositionByTileIndex(10,6), getPositionByTileIndex(10,12)));
-         */
+
+        enemies.add(new FishEnemy(getPositionByTileIndex(8,25), getPositionByTileIndex(14,25), Direction.LEFT));
+        enemies.add(new FishEnemy(getPositionByTileIndex(8,26), getPositionByTileIndex(14,26), Direction.RIGHT));
+        enemies.add(new FishEnemy(getPositionByTileIndex(14,12), getPositionByTileIndex(20,12), Direction.LEFT));
+        enemies.add(new FastFish(getPositionByTileIndex(26,17), getPositionByTileIndex(31,17), Direction.RIGHT));
+        enemies.add(new FastFish(getPositionByTileIndex(20,35), getPositionByTileIndex(26,34), Direction.LEFT));
+        enemies.add(new FastFish(getPositionByTileIndex(20,34), getPositionByTileIndex(27,34), Direction.LEFT));
+        enemies.add(new BigFish(getPositionByTileIndex(33,23), getPositionByTileIndex(37,23), Direction.LEFT));
+        enemies.add(new FishEnemy(getPositionByTileIndex(33,10), getPositionByTileIndex(39,10), Direction.RIGHT));
+        enemies.add(new FishEnemy(getPositionByTileIndex(33,11), getPositionByTileIndex(39,11), Direction.LEFT));
+        enemies.add(new FishEnemy(getPositionByTileIndex(33,12), getPositionByTileIndex(39,12), Direction.RIGHT));
+
         return enemies;
     }
 
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-        /*
-        enhancedMapTiles.add(new HorizontalMovingPlatform(
-                ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(24, 9),
-                getPositionByTileIndex(31, 9),
-                TileType.JUMP_THROUGH_PLATFORM,
-                3,
-                new Rectangle(0, 6,16,4),
-                Direction.RIGHT
-        ));
 
         enhancedMapTiles.add(new EndLevelBox(
-                getPositionByTileIndex(32, 10)
+                getPositionByTileIndex(38, 1)
         ));
-        */
+
         return enhancedMapTiles;
     }
 
