@@ -20,7 +20,6 @@ public class Cat extends Player {
     public Cat(float x, float y, Map map) {
         super(new SpriteSheet(ImageLoader.load("Cat.png"), 24, 24), x, y, map, "STAND_RIGHT");
         gravity = 0.5f;
-        //TODO: Water stuff in here
         terminalVelocityY = 6f;
         jumpHeight = 14.5f;
         jumpDegrade = .5f;
