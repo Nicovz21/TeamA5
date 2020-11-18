@@ -2,6 +2,7 @@ package Level;
 
 import Enemies.HurtBox;
 import Enemies.SpikeBox;
+import Engine.AudioPlayer;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
@@ -54,6 +55,8 @@ public abstract class Player extends GameObject {
 
     protected int health = 20;
     protected int lives = 5;
+
+    protected AudioPlayer audioPlayer;
 
     public Player(SpriteSheet spriteSheet, float x, float y, Map map, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -144,6 +147,7 @@ public abstract class Player extends GameObject {
         else if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
             keyLocker.lockKey(JUMP_KEY);
             playerState = PlayerState.JUMPING;
+
         }
 
         // if crouch key is pressed, player enters CROUCHING state
@@ -207,7 +211,12 @@ public abstract class Player extends GameObject {
     protected void playerJumping() {
         // if last frame player was on ground and this frame player is still on ground, the jump needs to be setup
         if ((previousAirGroundState == AirGroundState.GROUND && airGroundState == AirGroundState.GROUND)|| previousAirGroundState == AirGroundState.WATER) {
-
+            try {
+                audioPlayer = new AudioPlayer("jump.wav", false);
+                audioPlayer.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             // sets animation to a JUMP animation based on which way player is facing
             currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP_LEFT";
 
@@ -259,14 +268,27 @@ public abstract class Player extends GameObject {
         // if player last frame was in air and this frame is now on ground, player enters STANDING state
         if (previousAirGroundState == AirGroundState.AIR && airGroundState == AirGroundState.GROUND) {
             playerState = PlayerState.STANDING;
+            try {//TODO: keep or kick?
+                audioPlayer = new AudioPlayer("land.wav", false);
+                audioPlayer.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         else if (previousAirGroundState == AirGroundState.AIR && airGroundState == AirGroundState.WATER) {
             playerState = PlayerState.SWIMMING;
+            try {
+                audioPlayer = new AudioPlayer("enter_water.wav", false);
+                audioPlayer.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     protected void playerSwimming() {
+
         currentAnimationName = facingDirection == Direction.RIGHT ? "SWIM_RIGHT" : "SWIM_LEFT";
         //swim
         if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
@@ -296,6 +318,12 @@ public abstract class Player extends GameObject {
 
         if (previousAirGroundState == AirGroundState.WATER && airGroundState == AirGroundState.AIR) {
             playerState = PlayerState.JUMPING;
+            try {
+                audioPlayer = new AudioPlayer("exit_water.wav", false);
+                audioPlayer.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -357,15 +385,33 @@ public abstract class Player extends GameObject {
             // if map entity is an enemy, reduce health and handle accordingly
             //if spikes/lava/poison, insta-kill
             if (mapEntity instanceof HurtBox) {
+                if (lives > 0) try {
+                    audioPlayer = new AudioPlayer("hurt.wav", false);
+                    audioPlayer.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 lives--;
                 health = 20;
                 if (lives < 1) {
+                    if (levelState != LevelState.PLAYER_DEAD) try {
+                        audioPlayer = new AudioPlayer("die.wav", false);
+                        audioPlayer.play();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     levelState = LevelState.PLAYER_DEAD;
                 } else {
                     this.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
                 }
             } else if (mapEntity instanceof Enemy) {
                 health --;
+                if (health > 0) try {
+                    audioPlayer = new AudioPlayer("hurt.wav", false);
+                    audioPlayer.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 if (this.getX() <= mapEntity.getX()) {
                     this.setX(this.getX()-10);
                 } else this.setX(this.getX()+10);
@@ -373,6 +419,12 @@ public abstract class Player extends GameObject {
                     lives --;
                     health = 20;
                     if (lives < 1) {
+                        if (levelState != LevelState.PLAYER_DEAD) try {
+                            audioPlayer = new AudioPlayer("die.wav", false);
+                            audioPlayer.play();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         levelState = LevelState.PLAYER_DEAD;
                     } else {
                         this.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
