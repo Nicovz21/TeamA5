@@ -178,6 +178,8 @@ public abstract class Player extends GameObject {
             playerState = PlayerState.STANDING;
         }
 
+        waterCollisionCheck();
+
         // if jump key is pressed, player enters JUMPING state
         if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
             keyLocker.lockKey(JUMP_KEY);
@@ -187,6 +189,16 @@ public abstract class Player extends GameObject {
         // if crouch key is pressed,
         else if (Keyboard.isKeyDown(CROUCH_KEY)) {
             playerState = PlayerState.CROUCHING;
+        }
+
+        else if (previousAirGroundState == AirGroundState.GROUND && airGroundState == AirGroundState.WATER) {
+            playerState = PlayerState.SWIMMING;
+            try {
+                audioPlayer = new AudioPlayer("enter_water.wav", false);
+                audioPlayer.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -268,12 +280,13 @@ public abstract class Player extends GameObject {
         // if player last frame was in air and this frame is now on ground, player enters STANDING state
         if (previousAirGroundState == AirGroundState.AIR && airGroundState == AirGroundState.GROUND) {
             playerState = PlayerState.STANDING;
-            try {//TODO: keep or kick?
+            //commented out because the landing sound effect isn't the best
+            /*try {
                 audioPlayer = new AudioPlayer("land.wav", false);
                 audioPlayer.play();
             } catch (Exception e) {
                 e.printStackTrace();
-            }
+            }*/
         }
 
         else if (previousAirGroundState == AirGroundState.AIR && airGroundState == AirGroundState.WATER) {

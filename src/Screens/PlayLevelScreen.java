@@ -31,9 +31,9 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     public void initialize() {
         // define/setup map
-        this.map = new MapS3();
+        this.map = new Map1A();
         try {
-            audioPlayer = new AudioPlayer("Stage3_Coastlands.wav", true);
+            audioPlayer = new AudioPlayer("Stage1_Grasslands.wav", true);
         } catch (Exception e) {
             e.printStackTrace();
         }
