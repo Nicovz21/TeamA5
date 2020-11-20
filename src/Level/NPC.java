@@ -81,6 +81,10 @@ public class NPC extends MapEntity {
         }
     }
 
+    public boolean getTalkedTo() {
+        return talkedTo;
+    }
+
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);

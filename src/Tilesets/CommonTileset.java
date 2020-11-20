@@ -547,6 +547,167 @@ public class CommonTileset extends Tileset {
 
         mapTiles.add(topGoldPillarTile);
 
+        //stars 1
+        Frame starSky1Frame = new FrameBuilder(getSubImage(8, 0), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder starSky1Tile = new MapTileBuilder(starSky1Frame);
+
+        mapTiles.add(starSky1Tile);
+
+        //stars 2
+        Frame starSky2Frame = new FrameBuilder(getSubImage(8, 0), 0)
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+
+        MapTileBuilder starSky2Tile = new MapTileBuilder(starSky2Frame);
+
+        mapTiles.add(starSky2Tile);
+
+        //stars 3
+        Frame starSky3Frame = new FrameBuilder(getSubImage(8, 0), 0)
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .build();
+
+        MapTileBuilder starSky3Tile = new MapTileBuilder(starSky3Frame);
+
+        mapTiles.add(starSky3Tile);
+
+        //stars 4
+        Frame starSky4Frame = new FrameBuilder(getSubImage(8, 0), 0)
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_H_AND_V)
+                .build();
+
+        MapTileBuilder starSky4Tile = new MapTileBuilder(starSky4Frame);
+
+        mapTiles.add(starSky4Tile);
+
+        //stars 5
+        Frame starSky5Frame = new FrameBuilder(getSubImage(8, 1), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder starSky5Tile = new MapTileBuilder(starSky5Frame);
+
+        mapTiles.add(starSky5Tile);
+
+        //stars 6
+        Frame starSky6Frame = new FrameBuilder(getSubImage(8, 1), 0)
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+
+        MapTileBuilder starSky6Tile = new MapTileBuilder(starSky6Frame);
+
+        mapTiles.add(starSky6Tile);
+
+        //stars 7
+        Frame starSky7Frame = new FrameBuilder(getSubImage(8, 1), 0)
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .build();
+
+        MapTileBuilder starSky7Tile = new MapTileBuilder(starSky7Frame);
+
+        mapTiles.add(starSky7Tile);
+
+        //stars 8
+        Frame starSky8Frame = new FrameBuilder(getSubImage(8, 1), 0)
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_H_AND_V)
+                .build();
+
+        MapTileBuilder starSky8Tile = new MapTileBuilder(starSky8Frame);
+
+        mapTiles.add(starSky8Tile);
+
+        //night top water
+        Frame nightWaterTopFrame = new FrameBuilder(getSubImage(8, 2), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder nightWaterTopTile = new MapTileBuilder(nightWaterTopFrame);
+
+        mapTiles.add(nightWaterTopTile);
+
+        // night top lava
+        Frame nightLavaTopFrame = new FrameBuilder(getSubImage(8, 3), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder nightLavaTopTile = new MapTileBuilder(nightLavaTopFrame);
+
+        mapTiles.add(nightLavaTopTile);
+
+        // night middle branch
+        Frame nightMidBranchFrame = new FrameBuilder(getSubImage(8, 4), 0)
+                .withScale(tileScale)
+                .withBounds(0,6,16,4)
+                .build();
+
+        MapTileBuilder nightMidBranchTile = new MapTileBuilder(nightMidBranchFrame)
+                .withTileType(TileType.JUMP_THROUGH_PLATFORM);
+
+        mapTiles.add(nightMidBranchTile);
+
+        // night left end branch
+        Frame nightLeftBranchFrame = new FrameBuilder(getSubImage(8, 5), 0)
+                .withScale(tileScale)
+                .withBounds(0, 6, 16, 4)
+                .build();
+
+        MapTileBuilder nightLeftBranchTile = new MapTileBuilder(nightLeftBranchFrame)
+                .withTileType(TileType.JUMP_THROUGH_PLATFORM);
+
+        mapTiles.add(nightLeftBranchTile);
+
+        // night right end branch
+        Frame nightRightBranchFrame = new FrameBuilder(getSubImage(8, 5), 0)
+                .withScale(tileScale)
+                .withBounds(0, 6, 16, 4)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .build();
+
+        MapTileBuilder nightRightBranchTile = new MapTileBuilder(nightRightBranchFrame)
+                .withTileType(TileType.JUMP_THROUGH_PLATFORM);
+
+        mapTiles.add(nightRightBranchTile);
+
+        // moon
+        Frame[] moonFrames = new Frame[] {
+                new FrameBuilder(getSubImage(9, 0), 1000)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(9, 1), 150)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(9, 2), 500)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(9, 1), 150)
+                        .withScale(tileScale)
+                        .build()
+        };
+
+        MapTileBuilder moonTile = new MapTileBuilder(moonFrames)
+                .withTileType(TileType.PASSABLE);
+
+        mapTiles.add(moonTile);
+
+        // night sky
+        Frame nightSkyFrame = new FrameBuilder(getSubImage(9, 3), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder nightSkyTile = new MapTileBuilder(nightSkyFrame);
+
+        mapTiles.add(nightSkyTile);
+
+
         //buffers for the mapEditor
         Frame bufferFrame1 = new FrameBuilder(getSubImage(0, 1), 0)
                 .withScale(tileScale)

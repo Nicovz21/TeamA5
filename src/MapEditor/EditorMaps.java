@@ -34,6 +34,7 @@ public class EditorMaps {
             add("MapN4");
             add("MapN5");
             add("MapN6");
+            add("FinalMap");
         }};
     }
 
@@ -91,6 +92,8 @@ public class EditorMaps {
                 return new MapN5();
             case "MapN6":
                 return new MapN6();
+            case "FinalMap":
+                return new FinalMap();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }
