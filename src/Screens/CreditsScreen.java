@@ -17,6 +17,9 @@ public class CreditsScreen extends Screen {
     protected SpriteFont creditsLabel;
     protected SpriteFont createdByLabel;
     protected SpriteFont contributorsLabel;
+    protected SpriteFont expandersLabel;
+    protected SpriteFont composerLabel;
+
     protected SpriteFont returnInstructionsLabel;
 
     public CreditsScreen(ScreenCoordinator screenCoordinator) {
@@ -31,6 +34,8 @@ public class CreditsScreen extends Screen {
         creditsLabel = new SpriteFont("Credits", 15, 35, "Times New Roman", 30, Color.white);
         createdByLabel = new SpriteFont("Created by Alex Thimineur for Quinnipiac's SER225 Course.", 130, 140, "Times New Roman", 20, Color.white);
         contributorsLabel = new SpriteFont("Thank you to QU Alumni Brian Carducci, Joseph White,\nand Alex Hutman for their contributions.", 60, 220, "Times New Roman",20, Color.white);
+        expandersLabel = new SpriteFont("Base game expanded upon by Stephen Ippolito, \nAlex Santeramo, Isaac Crawford, and Nico Vasquez.", 60, 320,"Times New Roman", 20, Color.white);
+        composerLabel = new SpriteFont("All music composed by Isaac Crawford.", 60, 370,"Times New Roman", 20, Color.white);
         returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 560, "Times New Roman", 30, Color.white);
         keyLocker.lockKey(Key.SPACE);
     }
@@ -53,6 +58,8 @@ public class CreditsScreen extends Screen {
         creditsLabel.draw(graphicsHandler);
         createdByLabel.draw(graphicsHandler);
         contributorsLabel.drawWithParsedNewLines(graphicsHandler);
+        expandersLabel.drawWithParsedNewLines(graphicsHandler);
+        composerLabel.draw(graphicsHandler);
         returnInstructionsLabel.draw(graphicsHandler);
     }
 }
