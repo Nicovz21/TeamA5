@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 import java.lang.reflect.GenericArrayType;
 import java.nio.Buffer;
 
-// This is the class for the level lose screen
+// This is the class for the final boss screen
 public class LevelBossScreen extends Screen {
     //protected Sprite buffman;
     //protected boolean drawBoss;
@@ -35,7 +35,7 @@ public class LevelBossScreen extends Screen {
     protected JButton attack3;
     protected JButton attack4;
     protected int randomValue;
-    protected String[] bossAttacks= {"Git-Hub issues", "connectivity Problems", "Progress Report"};
+    protected String[] bossAttacks= {"Git-Hub issues", "Connectivity Problems", "Progress Report"};
     protected int health = 60;
     protected int playerHealth = 20;
     protected int playerDamage;
@@ -64,9 +64,11 @@ public class LevelBossScreen extends Screen {
         mainTextPanel.setBackground(Color.blue);
         mainTextPanel.setLayout(new GridLayout(3, 1));
 
+        //Failed buffman.png implementation:
         //buffman = new Sprite(ImageLoader.load("markBuffman.png"),1, 1, 5,ImageEffect.NONE);
         //drawBoss = false;
         //bossDrawn = false;
+
         //text for player health
         headerTextPanel = new JPanel();
         headerTextPanel.setBounds(40,50,800,100);
@@ -140,9 +142,9 @@ public class LevelBossScreen extends Screen {
 
     @Override
     public void update() {
-       /* if (drawBoss) {
+       /* Failed buffman.png implementation:
+        if (drawBoss) {
             drawBoss(graphicsHandler);
-            System.out.println("beans");
         }*/
         if (Keyboard.isKeyUp(Key.SPACE)) {
             keyLocker.unlockKey(Key.SPACE);
@@ -366,7 +368,10 @@ public class LevelBossScreen extends Screen {
         instructions.draw(graphicsHandler);
     }
 
-    /*public void drawBoss(GraphicsHandler graphicsHandler) {
+    /*
+    Failed buffman.png implementation:
+
+    public void drawBoss(GraphicsHandler graphicsHandler) {
         buffman.draw(graphicsHandler);
         bossDrawn = true;
     }
@@ -379,5 +384,5 @@ public class LevelBossScreen extends Screen {
         return bossDrawn;
     }
 
-     */ //failed buffman implementation
+     */
 }

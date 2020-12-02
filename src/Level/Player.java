@@ -1,14 +1,12 @@
 package Level;
 
 import Enemies.HurtBox;
-import Enemies.SpikeBox;
 import Engine.AudioPlayer;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
-import Level.Map;
 import Utils.AirGroundState;
 import Utils.Direction;
 
@@ -192,6 +190,7 @@ public abstract class Player extends GameObject {
         }
 
         else if (previousAirGroundState == AirGroundState.GROUND && airGroundState == AirGroundState.WATER) {
+            //enter water
             playerState = PlayerState.SWIMMING;
             try {
                 audioPlayer = new AudioPlayer("enter_water.wav", false);

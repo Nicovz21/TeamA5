@@ -14,13 +14,12 @@ import Utils.Stopwatch;
 
 import java.util.HashMap;
 
-// This class is for the green dinosaur enemy that shoots fireballs
-// It walks back and forth between two set points (startLocation and endLocation)
-// Every so often (based on shootTimer) it will shoot a Fireball enemy
+// This class is for the fish enemy for use in water
+// It swims back and forth between two set points (startLocation and endLocation)
 public class FishEnemy extends Enemy {
 
-    // start and end location defines the two points that it walks between
-    // is only made to walk along the x axis and has no air ground state logic, so make sure both points have the same Y value
+    // start and end location defines the two points that it swims between
+    // is only made to swim along the x axis and has no air ground state logic, so make sure both points have the same Y value
     protected Point startLocation;
     protected Point endLocation;
 
@@ -28,10 +27,6 @@ public class FishEnemy extends Enemy {
     private Direction startFacingDirection;
     protected Direction facingDirection;
     protected AirGroundState airGroundState;
-
-    // timer is used to determine when a fireball is to be shot out
-    protected Stopwatch shootTimer = new Stopwatch();
-
 
     public FishEnemy(Point startLocation, Point endLocation, Direction facingDirection) {
         super(startLocation.x, startLocation.y, new SpriteSheet(ImageLoader.load("FishEnemy.png"), 24, 24), "WALK_RIGHT");
@@ -61,7 +56,7 @@ public class FishEnemy extends Enemy {
 
         super.update(player);
 
-        // if dinosaur is walking, determine which direction to walk in based on facing direction
+        // if fish is swimming, determine which direction to swim in based on facing direction
         if (facingDirection == Direction.RIGHT) {
             currentAnimationName = "WALK_RIGHT";
             moveXHandleCollision(movementSpeed);
@@ -70,8 +65,8 @@ public class FishEnemy extends Enemy {
             moveXHandleCollision(-movementSpeed);
         }
 
-        // if dinosaur reaches the start or end location, it turns around
-        // dinosaur may end up going a bit past the start or end location depending on movement speed
+        // if fish reaches the start or end location, it turns around
+        // fish may end up going a bit past the start or end location depending on movement speed
         // this calculates the difference and pushes the enemy back a bit so it ends up right on the start or end location
         if (getX1() + getScaledWidth() >= endBound) {
             float difference = endBound - (getScaledX2());
@@ -86,7 +81,7 @@ public class FishEnemy extends Enemy {
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction) {
-        // if dinosaur enemy collides with something on the x axis, it turns around and walks the other way
+        // if fish enemy collides with something on the x axis, it turns around and walks the other way
         if (hasCollided) {
             if (direction == Direction.RIGHT) {
                 facingDirection = Direction.LEFT;

@@ -708,7 +708,7 @@ public class CommonTileset extends Tileset {
         mapTiles.add(nightSkyTile);
 
 
-        //buffers for the mapEditor
+        //buffers for the map editor; these let you scroll down far enough to see all the real tiles
         Frame bufferFrame1 = new FrameBuilder(getSubImage(0, 1), 0)
                 .withScale(tileScale)
                 .build();

@@ -13,7 +13,6 @@ import Utils.Point;
 
 import java.util.ArrayList;
 
-// Represents a test map to be used in a level
 public class MapS5 extends Map {
 
     public MapS5() {
@@ -137,7 +136,4 @@ public class MapS5 extends Map {
 
         return enhancedMapTiles;
     }
-
-
-
 }

@@ -27,10 +27,6 @@ public class Crab extends Enemy {
     protected Direction facingDirection;
     protected AirGroundState airGroundState;
 
-    // timer is used to determine when a fireball is to be shot out
-    protected Stopwatch shootTimer = new Stopwatch();
-
-
     public Crab(Point startLocation, Point endLocation, Direction facingDirection) {
         super(startLocation.x, startLocation.y, new SpriteSheet(ImageLoader.load("StevesEnemies.png"), 24, 24), "WALK_RIGHT");
         this.startLocation = startLocation;

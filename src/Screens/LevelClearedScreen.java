@@ -25,7 +25,7 @@ public class LevelClearedScreen extends Screen {
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
-        // paint entire screen black and dislpay level cleared text
+        // paint entire screen black and display level cleared text
         graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), Color.black);
         winMessage.draw(graphicsHandler);
     }

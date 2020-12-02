@@ -84,7 +84,7 @@ public class MapTileCollisionHandler {
         }
     }
 
-    //if touching water
+    //check to see if player is touching a water tile
     public static boolean isInWater(GameObject gameObject, MapTile mapTile) {
         if (mapTile.tileType == TileType.WATER) return gameObject.overlaps(mapTile);
         return false;

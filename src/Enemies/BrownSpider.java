@@ -15,8 +15,8 @@ import java.util.HashMap;
 
 public class BrownSpider extends Enemy {
 
-    // start and end location defines the two points that it walks between
-    // is only made to walk along the x axis and has no air ground state logic, so make sure both points have the same Y value
+    // start and end location defines the two points that it crawls between
+    // is only made to crawl along the y axis and has no air ground state logic, so make sure both points have the same X value
     protected Point startLocation;
     protected Point endLocation;
 

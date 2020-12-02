@@ -15,8 +15,8 @@ import java.util.HashMap;
 
 public class SpikeBox extends Enemy {
 
-    // start and end location defines the two points that it walks between
-    // is only made to walk along the x axis and has no air ground state logic, so make sure both points have the same Y value
+    // start and end location defines the two points that it moves between
+    // is only made to move along one axis and has no air ground state logic, so make sure both points have the same X/Y value depending on it's motion direction
     protected Point startLocation;
     protected Point endLocation;
 

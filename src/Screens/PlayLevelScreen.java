@@ -37,6 +37,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         // define/setup map
         this.map = new Map1A();
         this.currentLevel = "1-1";
+        //start music
         try {
             audioPlayer = new AudioPlayer("Stage1_Grasslands.wav", true);
         } catch (Exception e) {
@@ -108,7 +109,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                             this.playLevelScreenState=PlayLevelScreenState.RUNNING;
                             break;
                         case "1-3":
-                            this.map = new MapN2();
+                            this.map = new MapN1();
                             this.currentLevel = "1-4";
                             this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
                             this.player.addListener(this);
@@ -134,7 +135,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                             }
                             break;
                         case "2-1":
-                            this.map = new MapN1();
+                            this.map = new MapN2();
                             this.currentLevel = "2-2";
                             this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
                             this.player.addListener(this);
@@ -357,8 +358,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                             this.playLevelScreenState=PlayLevelScreenState.RUNNING;
                             break;
                         case "final":
+                            /*Currently the player is stuck in the boss screen at the end forever because it's
+                            not integrated into the rest of the game engine and main panel like other screen*/
                             //go to end screen
-                            //goBackToMenu();
+                            //goBackToMenu(); ?
                             break;
                     }
 
@@ -446,6 +449,6 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, PLAYER_DEAD, LEVEL_WIN_MESSAGE, LEVEL_LOSE_MESSAGE, BOSS_INITIATE, BOSS_BATTLE;
+        RUNNING, LEVEL_COMPLETED, PLAYER_DEAD, LEVEL_WIN_MESSAGE, LEVEL_LOSE_MESSAGE, BOSS_INITIATE, BOSS_BATTLE
     }
 }

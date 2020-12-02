@@ -13,7 +13,7 @@ import Utils.Point;
 
 import java.util.ArrayList;
 
-// Represents a test map to be used in a level
+// Represents a test map to be used in a level (or as a testing sandbox)
 public class TestMap extends Map {
 
     public TestMap() {
@@ -25,7 +25,6 @@ public class TestMap extends Map {
         ArrayList<Enemy> enemies = new ArrayList<>();
         enemies.add(new BugEnemy(getPositionByTileIndex(15, 12), Direction.LEFT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 4).addY(2), getPositionByTileIndex(22, 4).addY(2), Direction.RIGHT));
-        enemies.add(new SpikeBox(getPositionByTileIndex(7,5), getPositionByTileIndex(7,10), false));
         return enemies;
     }
 

@@ -13,7 +13,7 @@ import Utils.Point;
 
 import java.util.ArrayList;
 
-// Represents a test map to be used in a level
+
 public class Map1I extends Map {
 
     public Map1I() {
@@ -38,14 +38,5 @@ public class Map1I extends Map {
                 getPositionByTileIndex(47, 14)
         ));
         return enhancedMapTiles;
-    }
-
-    @Override
-    public ArrayList<NPC> loadNPCs() {
-        ArrayList<NPC> npcs = new ArrayList<>();
-
-        //npcs.add(new Walrus(getPositionByTileIndex(30, 13).subtract(new Point(0, 13)), this));
-
-        return npcs;
     }
 }

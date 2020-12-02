@@ -9,7 +9,7 @@ import SpriteFont.SpriteFont;
 
 import java.awt.*;
 
-// This class is for the credits screen
+// This class is for the instructions screen
 public class InstructionsScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map background;

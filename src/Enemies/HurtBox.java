@@ -11,10 +11,11 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-// This class is for the damage box that goes over kill tiles
+// This class is for the damage box that goes over stationary kill tiles such as spikes, lava, and poison water
 public class HurtBox extends Enemy {
 
     public HurtBox(Point location) {
+        //location should be the same as position of harmful tile
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("HurtBox.png"), 24, 24), "DEFAULT");
         this.initialize();
     }

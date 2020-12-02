@@ -15,7 +15,7 @@ import Utils.Point;
 import java.awt.*;
 import java.util.HashMap;
 
-
+//the silhouette of a mysterious figure awaiting you at the top of the tower... who could it be?
 public class Boss extends NPC {
 
     public Boss(Point location, Map map) {
