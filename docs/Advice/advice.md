@@ -77,8 +77,7 @@ on existing sprites. While the logic that goes into running the game is extremel
 as they are the "output" to the user of the program, and it never hurts to get involved a bit with the other side of things.
 
 With that said, the [spriters resource](https://www.spriters-resource.com/) is an amazing website full of graphics from
-any game on any console that you can think of. It also has a companion site [sounds resource](https://www.sounds-resource.com/) for looking up music/sound files
-(something that this game desperately needs).
+any game on any console that you can think of. It also has a companion site [sounds resource](https://www.sounds-resource.com/) for looking up music/sound files.
 
 ## Have fun
 

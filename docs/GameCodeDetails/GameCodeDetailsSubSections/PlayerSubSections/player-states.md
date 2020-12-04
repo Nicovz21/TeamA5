@@ -19,6 +19,7 @@ permalink: /GameCodeDetails/Player/PlayerStates
 ---
 
 # Player States
+###### revised December 2020 by Team A5
 
 The `Player` has several different states it can be in based on the value of its `playerState` instance variable.
 Each state can lead to another state based on the player's actions each cycle of the game loop. The states also dictate
@@ -28,6 +29,7 @@ The `PlayerState` enum in the `Level` package define the following states that t
 - **WALKING** -- player is walking
 - **JUMPING** -- player is jumping (or falling)
 - **CROUCHING** -- player is crouching
+- **SWIMMING** -- player is swimming
 
 ## Player Standing State
 
@@ -99,3 +101,28 @@ the player uses either the `FALL_RIGHT` or `FALL_LEFT` animation.
 
 If the player is on the ground and presses the down arrow key, the player will enter its `CROUCHING` state. Basically, the player goes
 lower to the ground to shrink its hurtbox, but that's all it does (and the player cannot walk out of `CROUCHING` state, but they can jump out of it).
+
+### Player Swimming State
+
+![level-3A.PNG](../../../assets/images/level-3A.PNG)
+
+If the player overlaps with a water tile at any point, they will enter the `SWIMMING` state. This is determined using the waterCollisionCheck method,
+which runs `MapTileCollisionHandler`'s isInWater method for every tile on the map, and sets the `airGroundState` accordingly:
+
+```java
+protected boolean waterCollisionCheck() {
+        for (MapTile tile: map.getMapTiles()) {
+            if (MapTileCollisionHandler.isInWater(this,tile)) {
+                airGroundState = AirGroundState.WATER;
+                return true;
+            }
+        }
+        return false;
+    }
+```
+
+This will tell the playerJumping or playerWalking method to set `playerState` to `SWIMMING`, taking us to the playerSwimming method.
+
+The method itself is much simpler than playerJumping overall, since gravity is no longer a factor whilst swimming. All it does is check
+the key being pressed and move the player in that direction(s) linearly, similar to playerWalking but with 4 directions. It then runs
+waterCollisionCheck to see if the player has left the water, and if so sets `playerState` back to `JUMPING`.

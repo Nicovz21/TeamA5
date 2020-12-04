@@ -19,6 +19,7 @@ permalink: /GameCodeDetails/Map/Enemies
 ---
 
 # Enemies
+###### revised December 2020 by Team A5
 
 ## What is an enemy?
 
@@ -31,8 +32,8 @@ An enemy can be given its own animation and graphics information,
 as well as its own `update` cycle which defines its behavior. There really isn't any limit to what an enemy can be made to do,
 it's just up to the implementer's coding skills!
 
-As of right now, the `Enemy` classes base `touchedPlayer` method will hurt the player (which in turn kills the player) if the player
-touches the enemy. If this behavior is not desired, you can remove that line of code, or override the `touchedPlayer` method
+As of right now, the `Enemy` classes base `touchedPlayer` method will hurt the player if the player
+touches the enemy, assuming they can't be jumped on or aren't if they are stompable. If this behavior is not desired, you can remove that line of code, or override the `touchedPlayer` method
 in an enemy class and include logic to determine if the enemy should be hurt or not.
 
 Most enemies adhere to similar collision detection to the player, and can follow those collision rules using the `GameObject` class's
@@ -40,8 +41,9 @@ collision methods just like the player does. More details on collision detection
 
 ## Enemy Subclass
 
-In the `Enemies` package, there are currently three subclasses of the `Enemy` class -- `BugEnemy`, `DinosaurEnemy`, and `Fireball`.
-Each one of these classes defines an enemy in the game, which can be seen in the game's one level.
+In the `Enemies` package, there are currently three main subclasses of the `Enemy` class -- `BugEnemy`, `DinosaurEnemy`, and `Fireball`.
+Each one of these classes defines an enemy in the game, which can be seen in the game's test level. All of the remaining enemies in the
+game are in some way based off of these (especially the dinosaur).
 
 Enemies can also set a few attributes such as:
 - **isRespawnable** -- if the enemy respawns when it becomes inactive and then active again or not; if set to false, the enemy will be "left in place" next time it becomes active
@@ -67,17 +69,21 @@ public ArrayList<Enemy> loadEnemies() {
 }
 ```
 
-## Enemies currently in game
+## Some enemies currently in game
 
 ### Bug Enemy
 
 ![bug-enemy.gif](../../../assets/images/bug-enemy.gif)
+###### image shown is the original bug, now DarkBug
 
 This enemy is defined by the `BugEnemy` class. I tried to replicate a typical goomba's movement patterns from Mario. Essentially,
 the bug enemy will continually walk forward. If it hits a wall, it will turn around. If it walks off the edge of a cliff, it will
 fall down until it touches the ground again before it starts walking forward again.
 
-The image file for the bug enemy is `BugEnemy.png`.
+Two other enemies share an image file with this one: DarkBug, a faster and creepier version, and ArmorBug, a more dangerous version.
+While BugEnemy and DarkBug can be stomped on, ArmorBug cannot, so keep that in mind when implementing them.
+
+The image file for the bug enemy and it's children is `BugEnemy.png`.
 
 ### Dinosaur Enemy
 
@@ -134,3 +140,36 @@ if (existenceTimer.isTimeUp()) {
 ```
 
 The image file for the fireball is `Fireball.png`.
+
+### Hurtbox
+
+This is less of an enemy and more of an implementation method to allow for damaging tiles. Basically, the Hurtbox
+is a static and invisible "enemy" that you place wherever you have something that's supposed to auto-kill the player,
+such as lava, spikes, poison, etc. This is the only "enemy" in the game that does this, as the rest only chip away at the player's
+health.
+
+The image file for the Hurtbox is `HurtBox.png`.
+
+### Remaining Enemies
+
+The rest of the enemies not yet mentioned are either some derivative of the BugEnemy or DinosaurEnemy class, some of which are grouped
+into one image file like all the fishes. The ones based off of BugEnemy all behave the same way save for movement speed, and all the ones
+based off of DinosaurEnemy do not shoot fireballs or anything else, but rather just move back and forth either horizontally or vertically
+depending on what kind of enemy they are (worth noting is the SpikeBox, which allows you to set which direction it moveswhen you create it).
+
+##Defeating Enemies
+
+Right now a certain few enemies are able to be "killed" by stepping on them: BugEnemy, DarkBug, and DinosaurEnemy. This is done by
+overwriting the touchedPlayer method of Enemy so that if the player "falls on top of them", then they will despawn. The method of
+detecting if you're actually falling on top of them is a little janky, but it's close enough to feel like stomping them most of the
+time. Be sure to add this to any enemies the you think should be able to be defeated (probably not the ones in water though, that
+will make the imperfection kinda obvious unless you find a better way to implement the touchedPlayer method).
+
+```java
+ @Override
+    public void touchedPlayer(Player player) {
+        if (player.getY2() < this.getY1()-10) {
+            this.mapEntityStatus = MapEntityStatus.REMOVED;
+        } else player.hurtPlayer(this);
+    }
+```

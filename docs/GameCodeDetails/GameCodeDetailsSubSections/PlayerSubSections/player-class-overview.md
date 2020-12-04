@@ -19,6 +19,7 @@ permalink: /GameCodeDetails/Player/PlayerClassOverview
 ---
 
 # Player Class Overview
+###### revised December 2020 by Team A5
 
 ## Player Resources Setup
 
@@ -39,7 +40,7 @@ Generally, `Player` subclasses will set those values as desired.
 The `Player` has several other important variables it uses to keep track of its current state:
 - **playerState** - based on the `PlayerState` enum in the `Level` package, a `Player` can be in a certain state which affects its game logic; currently, the supported states are `STANDING`, `WALKING`, `JUMPING`, `CROUCHING`
 - **facingDirection** - which direction the player is facing; can be either `LEFT` or `RIGHT`
-- **airGroundState** - if the player is currently on the ground `GROUND` or in the air `AIR` (what a horrible variable name, what was I thinking...)
+- **airGroundState** - if the player is currently on the ground `GROUND`, in the air `AIR`, or in the water `WATER` (what a horrible variable name, what was I thinking...)
 - **levelState** - allows the player to keep track of the current level state so it can track if it has beaten or has died in a level; more details on `LevelState` can be found in the `PlayLevelScreen` documentation [here](../ScreensSubSections/play-level-screen.md)
 
 ## Player Class Methods
@@ -62,6 +63,9 @@ protected void handlePlayerState() {
             break;
         case JUMPING:
             playerJumping();
+            break;
+        case SWIMMING:
+            playerSwimming();
             break;
     }
 }
@@ -86,6 +90,7 @@ animations have a "left" and "right" counterpart, which are used based on the wa
 1. `WALK_RIGHT` and `WALK_LEFT` -- player walking
 1. `JUMP_RIGHT` and `JUMP_LEFT` -- player jumping (rising upwards)
 1. `FALL_RIGHT` and `FALL_LEFT` -- player falling
+1. `SWIM_RIGHT` and `SWIM_LEFT` -- player swimming
 1. `CROUCH_RIGHT` and `CROUCH_LEFT` -- player crouching
 1. `DEATH_RIGHT` and `DEATH_LEFT` -- player dying
 
@@ -105,10 +110,10 @@ public Cat(float x, float y, Map map) {
     momentumYIncrease = .5f;
 
     // set keys to check for
-    JUMP_KEY = Key.UP;
-    MOVE_LEFT_KEY = Key.LEFT;
-    MOVE_RIGHT_KEY = Key.RIGHT;
-    CROUCH_KEY = Key.DOWN;
+    JUMP_KEY = Key.W;
+    MOVE_LEFT_KEY = Key.A;
+    MOVE_RIGHT_KEY = Key.D;
+    CROUCH_KEY = Key.S;
 }
 ```
 
@@ -117,7 +122,7 @@ The image file for the cat player is `Cat.png`.
 ## Player Moving
 
 When the player moves through the level, you may notice that most of the time it is not actually moving on screen, and instead
-stays in the middle of the screen while the map's camera moves to show more of the map. The only time the player actaully moves is when
+stays in the middle of the screen while the map's camera moves to show more of the map. The only time the player actually moves is when
 the map camera reaches the end of the screen and has no more map to show. You can see it in the below gif (notice the player is kept in the middle
 of the screen while the camera continually moves).
 

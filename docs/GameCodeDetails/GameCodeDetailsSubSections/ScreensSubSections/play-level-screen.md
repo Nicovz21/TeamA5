@@ -19,6 +19,7 @@ permalink: /GameCodeDetails/Screens/PlayLevelScreen
 ---
 
 # Play Level Screen
+###### revised December 2020 by Team A5
 
 The screen handles the logic and graphics related to playing the actual platformer game that is loaded  when the "PLAY GAME" option is selected form the game's main menu. 
 
@@ -39,6 +40,9 @@ its "current state" is stored in the `playLevelScreenState` instance variable. T
 - **PLAYER_DEAD** -- the player has lost the level by being killed by an enemy (which happens if you touch an enemy)
 - **LEVEL_WIN_MESSAGE** - after the player has beaten the level, a "level win message" is shown to the player -- this state is used after the LEVEL_COMPLETED state
 - **LEVEL_LOSE_MESSAGE** - after the player has lost the level by being killed by an enemy, a "level lose message" is shown to the player -- this state is used after the PLAYER_DEAD state  
+- **BOSS_INITIATE** - send player to the `levelBossScreen`
+- **BOSS_BATTLE** - continuously update the `levelBossScreen`
+
 
 ### Running State
 
@@ -63,7 +67,7 @@ player.draw(graphicsHandler);
 
 Basically, the `Map` and `Player` classes are updated and drawn each cycle, and they handle the rest of the work.
 The specific `Map` and `Player` class instance used for the level is defined in the `initialize` method -- at the moment
-this game currently only has one playable map (`TestMap.java` file in the `Map` package) and one player type (`Cat.java` file in the `Players` package).
+this game currently only has one player type (`Cat.java` file in the `Players` package).
 From there, the `PlayLevelScreen` just continually calls their `update` and `draw` methods to carry out the platformer game. The documentation
 for the `Map` class is located [here](../map.md), and for the `Player` class is located [here](../player.md).
 
@@ -76,8 +80,8 @@ When in this state, the platformer game can be played!
 When the player reaches the end of the level and hits the gold block, the level is "completed" and the `PlayLevelScreen's` state
 is changed to `LEVEL_COMPLETED`. Note that this state change is actually triggered by the `Player`, which calls the `PlayLevelScreen's` `onLevelCompleted`
 method when it has beaten the level in order for `PlayLevelScreen` to know to change states. From there, `PlayLevelScreen` changes state again to
-the `LEVEL_WIN_MESSAGE` state and shows the "Level Cleared" screen for a short amount of time before bringing the player back
-to the game's main menu.
+the `LEVEL_WIN_MESSAGE` state and shows the "Level Cleared" screen for a short amount of time before sending the player to the next level and returning to
+the `RUNNING` state.
 
 ![completing-level.gif](../../../assets/images/completing-level.gif)
 
@@ -114,3 +118,19 @@ if (Keyboard.isKeyDown(Key.SPACE)) {
 
 The `PlayLevelScreen` class instance is passed into the `LevelLoseScreen` class as well, and as you can see above the
 `PlayLevelScreen` exposes methods for `resetLevel` and `goBackToMenu` to make things easier.
+
+### Boss Battle State
+
+![boss-battle.png](../../../assets/images/boss-battle.png)
+
+When the `Boss` NPC is talked to in the final level, the `PlayLevelScreenState` is changed to `BOSS_INITIATE`, which
+ creates a new instance of `LevelBossScreen`, which creates a new panel containing a simple RPG-like "boss fight". From there the `PlayLevelScreenState` changes to
+`BOSS_BATTLE`, which simply runs the update method of `LevelBossScreen`.
+
+The fight itself is really bare bones to be honest, all you can do is attack with 4 different moves and can easily defeat Hoffman
+by spamming the best one since there are no consequences for using certain moves. Hoffman's attacks themselves don't offer much
+interesting either, he just dishes out a certain amount of damage by picking 1/3 moves based on simple RNG.
+
+Once you defeat Hoffman he just says he's going to retire (which is funny, because by the time you've read this he will have)
+and the game just sits there, waiting for you to put it out of it's misery. Ignore the "Hit esc to quit", because that doesn't actually
+work, you gotta just close the program. After all, it wouldn't be much of a Software Development class if there weren't issues to fix, eh?

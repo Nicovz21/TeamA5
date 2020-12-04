@@ -19,6 +19,7 @@ permalink: /GameCodeDetails/Player/CollisionDetection
 ---
 
 # Collision Detection
+###### revised December 2020 by Team A5
 
 ## What is collision detection?
 
@@ -75,8 +76,8 @@ super.moveXHandleCollision(moveAmountX);
 The class `MapTileCollisionHandler` is used by the move handle collisions methods to determine if a collision occurred, and if a collision
 did occur the player's position is adjusted to be right in front of the solid map tile it collided with.
 
-The `MapTileCollisionHandler` contains three methods: `getAdjustedPositionAfterCollisionCheckX`, `getAdjustedPositionAfterCollisionCheckY`,
-and `hasCollidedWithMapTile`. 
+The `MapTileCollisionHandler` contains four methods: `getAdjustedPositionAfterCollisionCheckX`, `getAdjustedPositionAfterCollisionCheckY`,
+`hasCollidedWithMapTile`, and `isInWater`. 
 
 The first two methods `getAdjustedPositionAfterCollisionCheckX` and `getAdjustedPositionAfterCollisionCheckY` do some "rectangle math" to determine which tiles in the map need to be checked for collisions.
 A common mistake newer game developers make is writing collision checking code that checks against every single tile in the map every single time -- this is a huge
@@ -101,6 +102,8 @@ private static boolean hasCollidedWithMapTile(GameObject gameObject, MapTile map
         case JUMP_THROUGH_PLATFORM:
             return direction == Direction.DOWN && gameObject.intersects(mapTile) &&
                     Math.round(gameObject.getScaledBoundsY2() - 1) == Math.round(mapTile.getScaledBoundsY1());
+        case WATER:
+            return null;
         default:
             return false;
     }
@@ -109,6 +112,10 @@ private static boolean hasCollidedWithMapTile(GameObject gameObject, MapTile map
 
 More tile types can easily be added to this method to determine if a collision occurred or not. The other two methods don't really have to be
 modified at all, new tiles types added to this `hasCollidedWithMapTile` method will work just as the existing three tile types do.
+
+The last method, `isInWater`, works with a game object to check an an individual tile to see if the object is both overlapping with said tile and if the tile is water.
+If that is the case, it will return true, meaning that the game object is in the water. This is currenty only used by the `Player` to determine when the player is
+swimming or not.
 
 ## Player collision detection with Enhanced Map Tiles
 
@@ -125,9 +132,9 @@ its own logic upon determining that it overlaps with a player in order to move t
 ## Player collision detection with Enemies
 
 The `Player` actually does not seek out collision detection with enemies -- instead each `Enemy` class will seek out a collision
-detection aganist the player. This allows an `Enemy` to specify to the `Player` class what to do upon being touched. For example,
-the enemies in the game (coming from the generic `Enemy` class) call the `Player` class's `hurtPlayer` method upon intersecting with the player,
-and the `Player` can then determine how it "hurts" itself (as of now, the player dies and it's a game over).
+detection against the player. This allows an `Enemy` to specify to the `Player` class what to do upon being touched. For example,
+the enemies in the game (coming from the generic `Enemy` class) call the `Player` class's `hurtPlayer` method upon intersecting with the player
+(assuming it didn't get stomped), and the `Player` can then determine how it "hurts" itself.
 
 ## Player collision detection with NPCs
 
@@ -170,7 +177,7 @@ public void onEndCollisionCheckY(boolean hasCollided, Direction direction) {
 }
 ```
 
-The `BugEnemy` class also uses this feature. It uses the `onEndCollisionCheckX` to determine if a collision happend, and if so it turns itself
+The `BugEnemy` class also uses this feature. It uses the `onEndCollisionCheckX` to determine if a collision happened, and if so it turns itself
 around and walks the other direction.
 
 ```java

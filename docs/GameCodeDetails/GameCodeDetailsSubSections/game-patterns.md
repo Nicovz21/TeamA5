@@ -18,6 +18,7 @@ permalink: /GameCodeDetails/GamePatterns
 ---
 
 # Game Patterns
+###### revised December 2020 by Team A5
 
 Here are details on some common design patterns that can be seen around the codebase.
 
@@ -365,7 +366,7 @@ There are a two enums defined in the `Utils` package that several classes use: `
 a 2D space only has those four directions, it's a very nice data type to have available.
 
 The `AirGroundState` enum is used mainly for map entities that can have a concept of being on ground vs in the air (such as the `Player` when
-jumping/falling or various enemies). This enum only has two possible values: `GROUND` and `AIR`. Nice and simple but very handy!
+jumping/falling or various enemies). This enum only has three possible values: `GROUND`, `AIR`, and `WATER`. Nice and simple but very handy!
 
 ## Utility Point
 

@@ -19,6 +19,7 @@ permalink: /GameCodeDetails/Screens/MenuScreen
 ---
 
 # Menu Screen
+###### revised December 2020 by Team A5
 
 The screen handles the logic and graphics related to the menu that is loaded upon the game starting up.
 
@@ -28,25 +29,25 @@ The class file for it is `MenuScreen.java` which can be found in the `Screens` p
 
 ## Functionality
 
-The menu screen's only real job is to allow the player to select between its two options "Play Game" and "Credits".
+The menu screen's only real job is to allow the player to select between its three options "Play Game", "Credits", and "Instructions".
 Upon selecting an option, `MenuScreen` will change `ScreenCoordinator's` game state which will force it to load the appropriate screen based
 on the option selected.
 
 ```java
-// if down key is pressed, add one to current menu item hovered
-// "Play Game" option is menu item 0, pressing down will add 1 to the current menu item hovered, 
-// which changes it to the "Credits" option
-if (Keyboard.isKeyDown(Key.DOWN) && keyTimer.isTimeUp()) {
-    keyTimer.reset();
-    currentMenuItemHovered++;
-}
-// if up key is pressed, subtract one to current menu item hovered
-// "Credits" option is menu item 1, pressing up will sbutract 1 to the current menu item hovered, 
-// which changes it to the "Play Game" option
-} else if (Keyboard.isKeyDown(Key.UP) && keyTimer.isTimeUp()) {
-    keyTimer.reset();
-    currentMenuItemHovered--;
-}
+        // if down or up is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
+        if (Keyboard.isKeyDown(Key.DOWN) && keyTimer.isTimeUp()) {
+            keyTimer.reset();
+            currentMenuItemHovered++;
+        } else if (Keyboard.isKeyDown(Key.UP) && keyTimer.isTimeUp()) {
+            keyTimer.reset();
+            currentMenuItemHovered--;
+        }
+        // if down is pressed on last menu item or up is pressed on first menu item, "loop" the selection back around to the beginning/end
+        if (currentMenuItemHovered > 2) {
+            currentMenuItemHovered = 0;
+        } else if (currentMenuItemHovered < 0) {
+            currentMenuItemHovered = 2;
+        }
 ```
 
 The `MenuScreen` class's update cycle mainly checks if the user has pressed the down or up keys and if so will move the little blue square from one
@@ -62,10 +63,16 @@ if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
     if (menuItemSelected == 0) {
         screenCoordinator.setGameState(GameState.LEVEL);
 
-    // if secpmd menu item is selected "CREDITS, set ScreenCoordinator game state to CREDITS
+    // if second menu item is selected "CREDITS", set ScreenCoordinator game state to CREDITS
     } else if (menuItemSelected == 1) {
         screenCoordinator.setGameState(GameState.CREDITS);
     }
+
+    //if third menu item is selected "INSTRUCTIONS", set ScreenCoordinator game state to INSTRUCTIONS
+      else if (menuItemSelected == 2 ) {
+        screenCoordinator.setGameState(GameState.INSTRUCTIONS);
+    }
+
 }
 ```
 
@@ -97,7 +104,7 @@ is used when actually playing the platformer game. While any image could have be
 The little blue square moves based on the value of `currentMenuItemHovered` (which changes value when up or down is pressed) to be in front
 of the currently hovered item's text. The text that is hovered over will also change color to gold while the one not hovered will change color to black.
 
-The menu item text ("Play Game" and "Credits") use the `SpriteFont` class and are defined in the `initialize` method (variables `playGame` and `credits`.
+The menu item text ("Play Game" and "Credits") use the `SpriteFont` class and are defined in the `initialize` method (variables `playGame`, `credits`, and `instructions`).
 
 ## How to add a new menu item
 

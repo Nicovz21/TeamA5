@@ -2,7 +2,7 @@
 layout: default
 title: Config
 parent: Game Engine
-nav_order: 6
+nav_order: 7
 permalink: /GameEngine/Config
 ---
 
@@ -18,6 +18,7 @@ permalink: /GameEngine/Config
 ---
 
 # Config
+###### revised December 2020 by Team A5
 
 ## What is a config?
 
@@ -38,6 +39,7 @@ the application is not running in order to modify a "global" aspect of it. The f
 - **FPS** -- how many game loop cycles per second are run (FPS = **F**rames **P**er **S**econd)
 - **RESOURCES_PATH** -- root folder path to where all game assets will be stored (image files, etc)
 - **MAP_FILES_PATH** -- root folder path to where all map files will be stored
+- **AUDIO_FILES_PATH** -- root folder path to where all the audio files will be stored (music, sound effects)
 - **GAME_WINDOW_WIDTH** -- width of the game's JFrame window
 - **GAME_WINDOW_HEIGHT** -- height of the game's JFrame window
 - **TRANSPARENT_COLOR** -- default transparent color the `ImageLoader` class will use when loading an image into the game

@@ -19,6 +19,7 @@ permalink: /GameCodeDetails/Map/MapTilesAndTilesets
 ---
 
 # Map Tiles and Tilesets
+###### revised December 2020 by Team A5
 
 ## Map Tiles
 
@@ -53,11 +54,11 @@ The available tile types are included in the `TileType` enum in the `Level` pack
 
 A tileset is a collection of map tiles. Easy enough.
 
-Graphic wise, a tileset defines each tile in one image. Below is the `CommonTileset.png` which the (only) level in the game uses
+Graphic wise, a tileset defines each tile in one image. Below is the `CommonTileset.png` which every level in the game uses
 to construct its map. You will notice that it's literally one image with each map tile defined. Note that each map tile in a tileset
 must be the SAME width and height.
 
-![common-tileset.png](../../../assets/images/common-tileset.png)
+![common-tileset.png](../../../assets/images/common-tileset.png) (***fix***)
 
 The `Tileset` class in the `Level` package represents a tileset, which contains a collection of `MapTile` object. The way to define
 a tileset in this game is to create a class that extends from this `Tileset` class, such as the `CommonTileset` class in the `Tilesets` package.
@@ -226,3 +227,4 @@ The available tile types are defined in the `TileType` enum, and include:
 - **PASSABLE** -- player can pass through it, such as the sky tiles
 - **JUMP_THROUGH_PLATFORM** -- all platformers have these types of platforms, the player can walk on top of it and cannot pass through it
 when coming downwards from above, but can pass through it when coming upwards from below; the tree branch tiles are jump through platforms for example
+- **WATER** -- player can swim through these tiles (does not include water surface, because then you would start swimming above the water line)

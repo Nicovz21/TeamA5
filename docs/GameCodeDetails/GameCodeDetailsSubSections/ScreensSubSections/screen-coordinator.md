@@ -19,6 +19,7 @@ permalink: /GameCodeDetails/Screens/ScreenCoordinator
 ---
 
 # Screen Coordinator
+###### revised December 2020 by Team A5
 
 ## What is the Screen Coordinator?
 
@@ -29,7 +30,7 @@ and drawing graphics for a piece of the game.
 
 ## What Screens can the Screen Coordinator currently load?
 
-Currently, there are three main screens that the `ScreenCoordinator` class can load: the menu screen, the credits screen,
+Currently, there are four main screens that the `ScreenCoordinator` class can load: the menu screen, the credits screen, the instructions screen,
 and the play level screen. The menu screen is always loaded at the start of the game (which you see when the game first starts up):
 
 ![menu-screen.png](../../../assets/images/menu-screen.png)
@@ -41,6 +42,7 @@ When the "Play Game" option on the menu screen is selected, the `ScreenCoordinat
 And finally, when the "Credits" option on the menu screen is selected, the `ScreenCoordinator` class responds by predictably loading the credits screen:
 
 ![credits-screen.png](../../../assets/images/credits-screen.png)
+######the Instructions screen is pretty much the same thing.
 
 The `ScreenCoordinator` can support as many screens as necessary -- there is no limit!
 
@@ -49,7 +51,7 @@ The `ScreenCoordinator` can support as many screens as necessary -- there is no 
 The `ScreenCoordinator` class has an instance variable for keeping track of the current game state. This `gameState` variable
 can be of any type defined in the `GameState` enum, which can be found in the `GameState.java` file located in the `Game` package.
 
-The current states defined in the `GameState` enum are `MENU`, `LEVEL`, `CREDITS`, which all coincide with a specific screen.
+The current states defined in the `GameState` enum are `MENU`, `LEVEL`, `CREDITS`, `INSTRUCTIONS` which all coincide with a specific screen.
 Based on the value of the `gameState` instnace variable, the `ScreenCoordinator` will choose to load its corresponding screen. How
 this is done can be seen in the below snippet of `ScreenCoordinator's` `update` method:
 
@@ -63,6 +65,9 @@ switch(gameState) {
         break;
     case CREDITS:
         currentScreen = new CreditsScreen(this);
+        break;
+    case INSTRUCTIONS:
+        currentScreen = new InstructionsScreen(this);
         break;
 }
 ```

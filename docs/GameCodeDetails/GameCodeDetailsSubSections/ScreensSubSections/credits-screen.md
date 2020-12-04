@@ -19,6 +19,7 @@ permalink: /GameCodeDetails/Screens/CreditsScreen
 ---
 
 # Credits Screen
+###### revised December 2020 by Team A5
 
 The screen handles the logic and graphics related to the credits screen that is loaded when the "CREDITS" option is selected form the game's main menu.
 
@@ -56,3 +57,7 @@ is used when actually playing the platformer game. While any image could have be
 
 All of the text shown on screen is created with various `SpriteFont` graphics defined in the class, which are setup in the
 `initialize` method.
+
+## Instructions Screen
+
+The Instructions screen works the exact same as the credits screen, so there's no reason to make a separate document explaining it.

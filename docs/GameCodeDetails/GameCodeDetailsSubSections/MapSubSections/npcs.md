@@ -19,6 +19,7 @@ permalink: /GameCodeDetails/Map/NPCs
 ---
 
 # NPCs
+###### revised December 2020 by Team A5
 
 ## What is an NPC?
 
@@ -35,8 +36,8 @@ disappears and they can be re-talked to again.
 
 ## NPC Subclass
 
-In the `NPCs` package, there is currently only one subclass of the `NPC` class -- `Walrus`.
-This `Walrus` NPC can be seen in the game's one level.
+In the `NPCs` package, there are currently only two subclass of the `NPC` class -- `Walrus`, and `Boss`, the latter of which is only meant to trigger the final boss fight.
+The `Walrus` NPC can be seen in the game's test level `TestMap`.
 
 ## Adding a new NPC to the game
 
@@ -88,3 +89,20 @@ Lining the rectangle up with the text and the NPC is a total PITA. Those random 
 pixel by pixel until I was happy with the position.
 
 The image file for the walrus is `Walrus.png`.
+
+### Boss
+
+As mentioned before, this NPC, defined by the `Boss` class, behaves slightly differently- instead of creating a speech bubble when talked to, it sends the player to the final
+boss fight of the game. This is actually handled in the `PlayLevelScreen` class, which uses FinalMap's unique battleInitiated method:
+
+```java
+if (map instanceof FinalMap) {
+                    if (((FinalMap) map).battleInitiated()) {
+                        playLevelScreenState = PlayLevelScreenState.BOSS_INITIATE;
+                    }
+                }
+```
+
+(insert boss)
+
+The image file for the boss is `Boss.png`.

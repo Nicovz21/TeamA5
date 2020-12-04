@@ -70,6 +70,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 player.update();
                 map.update(player);
 
+                //sends player to final boss battle if in final map and talked to boss
                 if (map instanceof FinalMap) {
                     if (((FinalMap) map).battleInitiated()) {
                         playLevelScreenState = PlayLevelScreenState.BOSS_INITIATE;
@@ -221,7 +222,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                             this.playLevelScreenState=PlayLevelScreenState.RUNNING;
                             try {
                                 audioPlayer.stop();
-                                audioPlayer = new AudioPlayer("Stage5_Stonelands.wav", true);
+                                audioPlayer = new AudioPlayer("Stage4_Dirtlands.wav", true);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -265,6 +266,12 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                             this.player.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
                             this.player.setLevelState(LevelState.RUNNING);
                             this.playLevelScreenState=PlayLevelScreenState.RUNNING;
+                            try {
+                                audioPlayer.stop();
+                                audioPlayer = new AudioPlayer("Stage5_Stonelands.wav", true);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             break;
                         case "5-1":
                             this.map = new Map5I();

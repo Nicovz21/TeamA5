@@ -2,7 +2,7 @@
 layout: default
 title: Drawing Graphics
 parent: Game Engine
-nav_order: 5
+nav_order: 6
 permalink: /GameEngine/DrawingGraphics
 ---
 

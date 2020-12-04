@@ -18,6 +18,7 @@ permalink: /GameEngine/GUI Components
 ---
 
 # GUI Components
+###### revised December 2020 by Team A5
 
 ## Java Swing Library
 
@@ -40,8 +41,8 @@ The `GamePanel` class in the `Engine` package extends the Java Swing `JPanel` cl
 Additionally (although in retrospect this wasn't a great design decision), the `GamePanel` class also sets up various other
 essential game resources like the `graphicsHandler` and the Java Swing `Timer` that runs the game loop.
 
-The `GamePanel` class is also home to the universal pause function (which is another poor design decision to include in this class). Pressing the `P`
-key at any point while the game is running will immediately stop the game loop's `update` cycle but will continue the game's `draw` cycle,
+The `GamePanel` class is also home to the pause function. Pressing the `P`
+key while the game is running (GameState.LEVEL) will immediately stop the game loop's `update` cycle but will continue the game's `draw` cycle,
 which essentially "pauses" the game. It will also show the [sprite font](../../GameCodeDetails/GameCodeDetailsSubSections/sprite-font.md) text "PAUSE" in the middle of the screen while the game is paused. 
 The `pauseLabel` variable is what defines that "PAUSE" text, and the `update` method and `draw` method contain the pause logic.
 
