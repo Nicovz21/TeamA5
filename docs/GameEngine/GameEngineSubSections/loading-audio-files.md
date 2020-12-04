@@ -56,3 +56,12 @@ method in the try block to have it play.
 ### Changing Audio directory
 
 This is basically the same as it is for images in the previous section, so just use that as a reference.
+
+
+### Adding songs to the folder
+
+An important thing to note when adding sounds/songs: the .wav file must have a 16-bit PCM when you export
+it from wherever you do, or else the sound/music will not play and the game will get angry at you. If you're
+making the music/sound in a DAW (Digital Audio Workstation) there's usually an option you can select when exporting
+to make is 16-bit PCM instead of 24-bit (which was the default for Reaper, which is what was used for the songs).
+If it's taken from online somewhere and it doesn't work there's probably a converter somewhere you can look up.
