@@ -104,7 +104,7 @@ lower to the ground to shrink its hurtbox, but that's all it does (and the playe
 
 ### Player Swimming State
 
-![level-3A.PNG](../../../assets/images/level-3A.PNG)
+![level-3A.png](../../../assets/images/level-3A.png)
 
 If the player overlaps with a water tile at any point, they will enter the `SWIMMING` state. This is determined using the waterCollisionCheck method,
 which runs `MapTileCollisionHandler`'s isInWater method for every tile on the map, and sets the `airGroundState` accordingly:

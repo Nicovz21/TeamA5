@@ -88,16 +88,16 @@ In Game Screens (the player character is the adorable cat!)
 ![playing-level.gif](../assets/images/playing-level.gif)
 
 Screenshots from the most recent build:
-![level-S1.PNG](../assets/images/level-S1.PNG)
+![level-S1.png](../assets/images/level-S1.png)
 
-![level-N2.PNG](../assets/images/level-N2.PNG)
+![level-N2.png](../assets/images/level-N2.png)
 
-![level-3A.PNG](../assets/images/level-3A.PNG)
+![level-3A.png](../assets/images/level-3A.png)
 
-![level-4I.PNG](../assets/images/level-4I.PNG)
+![level-4I.png](../assets/images/level-4I.png)
 
-![level-S5.PNG](../assets/images/level-S5.PNG)
+![level-S5.png](../assets/images/level-S5.png)
 
-![level-6I.PNG](../assets/images/level-6I.PNG)
+![level-6I.png](../assets/images/level-6I.png)
 
-![tower-summit.PNG](../assets/images/tower-summit.PNG)
+![tower-summit.png](../assets/images/tower-summit.png)

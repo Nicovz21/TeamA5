@@ -62,7 +62,7 @@ really have any ideas on how to fix it other than to just not design a level tha
 
 ## Final boss exit difficulties
 
-![no-escape.PNG](../assets/images/no-escape.PNG)
+![no-escape.png](../assets/images/no-escape.png)
 
 In the final boss battle it says "press ESC to exit". However, this hotkey doesn't really work, and thus the player is stuck at the end of the battle
 forever until they manually terminate the program. This is definitely not ideal, since you'd want the game to either go back to the main menu upon completion

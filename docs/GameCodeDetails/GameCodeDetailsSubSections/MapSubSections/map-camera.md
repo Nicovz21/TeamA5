@@ -42,7 +42,7 @@ Think of the camera as a defined rectangle, with x, y, width, and height attribu
 entire size of the screen.
 
 Below is the entire map image, which is made up of individual tiles. The entire map does NOT fit on the screen all at once.
-![entire-map.PNG](../../../assets/images/entire-map.PNG)
+![entire-map.PNG](../../../assets/images/entire-map.png)
 
  
 The camera starts at x and y (0, 0) when the map is first loaded. Upon starting the game, the camera moves

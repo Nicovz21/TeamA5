@@ -39,7 +39,7 @@ respawn the enemies when you lose a life should fix this.
 
 ## More Tiles
 
-![level-N1.PNG](../assets/images/level-N1.PNG)
+![level-N1.png](../assets/images/level-N1.png)
 
 Right now the game has one tileset (CommonTileset) which contains all the tiles used. These work fine, but some of them are
 made with only certain areas in mind, like how lava only matches with the cave background, or flowers only match with the
@@ -108,7 +108,7 @@ setting from the previous one or exiting the previous setting into the new one. 
 since it was just a bunch of levels we made separately compiled together, but it has it's moments, like when 5I transitions from the
 cave setting of N5 to the fortress setting of S5.
 
-![level-5A.PNG](../assets/images/level-5A.PNG)
+![level-5A.png](../assets/images/level-5A.png)
 
 ## Linear Difficulty Scaling
 
@@ -151,4 +151,4 @@ If you're able to fix all of this, then adding a picture for the boss is highly 
 attempted to add below. Not that you necessarily *have* to use it, but he's in the resources folder waiting
 to be used, assuming you clean up the edges of the sprite).
 
-![markBuffman.PNG](../assets/images/markBuffman.PNG)
+![markBuffman.png](../assets/images/markBuffman.png)
