@@ -36,7 +36,7 @@ The good news is this is super easy to work around -- just use a white color wit
 no different in game than (255,255,255) I promise). Off the top of my head, the `Walrus.png` image uses this technique for its tusks because
 pure white wouldn't show, which is how I found out about this bug.
 
-## Moving the player with arrow keys doesn't override previous key press properly (updated)
+## Moving the player with WASD keys doesn't override previous key press properly (updated)
 
 In the original game, if you held the key to walk right and then walk left, it would override the walking to the right, but not vice versa. To fix it,
 we made it so that if both are being held, then the player will stand still. This is okay, but still not as ideal as having the inputs override eachother
@@ -53,6 +53,13 @@ As it currently stands there is nothing to detect if you fall in a hole through 
 player falls into it, the player will fall endlessly and thus prevent the game from being playable without forcibly restarting. This is far from ideal,
 as it limits the map design potential. While not necessary, this could possibly be fixed by either checking to see if the player is touching the map
 or by putting something outside the map boundaries under the hole that kills the player.
+
+## Dying in water causes the water exit sound to play
+
+This is because when you die normally, it just teleports you and resets your health. Because of this, the game detects that you have left the water and
+plays the water exit sound. A similar thing happens if the level starts in water like in N3- when the level starts, the game plays the water entering
+sound even though you were already in the water, and if you die outside of the water it'll play it again upon teleporting you. In short, this doesn't
+make physical sense, so while it has no impact on gameplay patching it out wouldn't be a bad idea.
 
 ## Moving Platform grants immunity
 
